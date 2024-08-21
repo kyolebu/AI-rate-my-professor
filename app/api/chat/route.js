@@ -1,32 +1,64 @@
 import { NextResponse } from 'next/server'
 import { Pinecone } from '@pinecone-database/pinecone'
-import OpenAI from 'openai'
+import { HfInference } from '@huggingface/inference';
+import Groq from "groq-sdk";
+
 
 const systemPrompt = 
 `
 You are a rate my professor agent to help students find classes, that takes in user questions and answers them.
 For every user question, the top 3 professors that match the user question are returned.
-Use them to answer the question if needed.
+Use them to answer the question if needed. Answer using knowledge given to you ONLY. Do NOT make anything up of your own.
 `
+
+const inference = new HfInference(process.env.HUGGINGFACE_API_KEY);
+const pc = new Pinecone({apiKey: process.env.PINECONE_API_KEY});
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
+const index = pc.index('rag').namespace('ns1') // need to change for our specific use case.
 
 export async function POST(req) {
   const data = await req.json()
   const pc = new Pinecone({
     apiKey: process.env.PINECONE_API_KEY,
+
   })
-  const index = pc.index('rag').namespace('ns1')
-  const openai = new OpenAI()
+  
+  const indexName = 'rag';
+  const namespaceName = 'ns1';
+  const indexes = await pc.listIndexes();
+    if (Array.isArray(indexes) && !indexes.includes(indexName)) {
+        console.log(`Index ${indexName} does not exist. Creating index...`);
+        await pc.createIndex({
+            name: indexName,
+            dimension: 384, // Depends on embedding model
+            metric: 'cosine', // Depends on embedding model
+            spec: { 
+                serverless: { 
+                    cloud: 'aws', 
+                    region: 'us-east-1' 
+                }
+            }
+        });
+        console.log(`Index ${indexName} created successfully.`);
+    } else {
+        console.log(`Index ${indexName} already exists.`);
+    }
+
 
   const text = data[data.length - 1].content
-  const embedding = await openai.embeddings.create({
-  model: 'text-embedding-3-small',
-  input: text,
-  encoding_format: 'float',
-})
+
+  const embedding = await inference.featureExtraction({
+        model: "sentence-transformers/all-MiniLM-L6-v2",
+        inputs: text,
+    });
+
+
 const results = await index.query({
     topK: 5,
+    vector: embedding,
     includeMetadata: true,
-    vector: embedding.data[0].embedding,
+    includeValues: true,
   })
 
   let resultString = 
@@ -44,15 +76,24 @@ const lastMessage = data[data.length - 1]
 const lastMessageContent = lastMessage.content + resultString
 const lastDataWithoutLastMessage = data.slice(0, data.length - 1)
 
-const completion = await openai.chat.completions.create({
+const completion = await groq.chat.completions.create({
     messages: [
-      {role: 'system', content: systemPrompt},
+      {
+        role: 'system', 
+        content: systemPrompt
+      },
       ...lastDataWithoutLastMessage,
-      {role: 'user', content: lastMessageContent},
+
+      {
+        role: 'user', 
+        content: lastMessageContent},
     ],
-    model: 'gpt-3.5-turbo',
+    model: "llama3-8b-8192",
     stream: true,
+    max_tokens: 500,
   })
+
+
   const stream = new ReadableStream({
     async start(controller) {
       const encoder = new TextEncoder()
