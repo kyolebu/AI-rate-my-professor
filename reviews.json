@@ -1,130 +1,124 @@
 {
     "reviews": [
-      {
-        "professor": "Dr. Sarah Johnson",
-        "subject": "Introductory Psychology",
-        "stars": 4,
-        "review": "Dr. Johnson is an excellent professor who really cares about her students. Her lectures are engaging and she is always available to help during office hours."
-      },
-      {
-        "professor": "Professor Michael Lee",
-        "subject": "Calculus I",
-        "stars": 3,
-        "review": "Professor Lee's lectures can be dry at times, but he is very knowledgeable and tests fairly. The workload is manageable if you stay on top of the material."
-      },
-      {
-        "professor": "Dr. Elizabeth Rodriguez",
-        "subject": "Introduction to Biology",
-        "stars": 5,
-        "review": "Dr. Rodriguez is an incredibly passionate and effective teacher. Her labs are well-designed and help cement the concepts from lecture. I would highly recommend taking any of her classes."
-      },
-      {
-        "professor": "Professor David Wilson",
-        "subject": "American History Since 1865",
-        "stars": 4,
-        "review": "Professor Wilson is a knowledgeable and engaging lecturer. His classes are discussion-based, which helps students stay engaged with the material."
-      },
-      {
-        "professor": "Dr. Emily Chen",
-        "subject": "Organic Chemistry",
-        "stars": 2,
-        "review": "Dr. Chen's lectures can be confusing and she doesn't always explain concepts clearly. The exams are extremely challenging and the workload is very heavy."
-      },
-      {
-        "professor": "Professor Liam Nguyen",
-        "subject": "Introduction to Computer Science",
-        "stars": 4,
-        "review": "Professor Nguyen is very approachable and always willing to help students. The assignments are fair and the class overall is well-structured."
-      },
-      {
-        "professor": "Dr. Olivia Gonzalez",
-        "subject": "Environmental Science",
-        "stars": 5,
-        "review": "Dr. Gonzalez is an incredibly knowledgeable and passionate professor. Her classes are thought-provoking and she does an excellent job of connecting course material to real-world issues."
-      },
-      {
-        "professor": "Professor Jacob Patel",
-        "subject": "Principles of Marketing",
-        "stars": 3,
-        "review": "Professor Patel's lectures can be dry and boring at times. The coursework is fairly straightforward, but he doesn't always provide clear guidance on assignments."
-      },
-      {
-        "professor": "Dr. Sophia Nakamura",
-        "subject": "Quantum Mechanics",
-        "stars": 4,
-        "review": "Dr. Nakamura is an extremely knowledgeable professor who is passionate about the subject matter. Her lectures can be challenging, but she is always willing to provide additional support to help students succeed."
-      },
-      {
-        "professor": "Professor Isabella Rossi",
-        "subject": "Introduction to Sociology",
-        "stars": 5,
-        "review": "Professor Rossi is an engaging and thought-provoking lecturer. Her classes are discussion-based and she encourages students to think critically about social issues."
-      },
-      {
-        "professor": "Dr. Ethan Hernandez",
-        "subject": "General Chemistry",
-        "stars": 3,
-        "review": "Dr. Hernandez is knowledgeable, but his lectures can be dry and difficult to follow. The course workload is heavy and the exams are challenging."
-      },
-      {
-        "professor": "Professor Ava Takahashi",
-        "subject": "Intermediate Spanish",
-        "stars": 4,
-        "review": "Professor Takahashi is an excellent language instructor. Her classes are engaging and she does a great job of immersing students in the language."
-      },
-      {
-        "professor": "Dr. Lucas Monteiro",
-        "subject": "Introduction to Philosophy",
-        "stars": 5,
-        "review": "Dr. Monteiro is a brilliant and insightful professor. His lectures are thought-provoking and he encourages students to develop their own philosophical perspectives."
-      },
-      {
-        "professor": "Professor Isabelle Durand",
-        "subject": "Macroeconomics",
-        "stars": 4,
-        "review": "Professor Durand is a knowledgeable and engaging lecturer. Her classes are well-structured and she does a good job of relating course material to current events."
-      },
-      {
-        "professor": "Dr. Noah Patel",
-        "subject": "Molecular Biology",
-        "stars": 4,
-        "review": "Dr. Patel is a passionate and dedicated professor. His lectures are informative and he provides helpful guidance on lab assignments."
-      },
-      {
-        "professor": "Professor Mia Hernandez",
-        "subject": "Intro to Graphic Design",
-        "stars": 5,
-        "review": "Professor Hernandez is an amazing instructor. Her classes are creative, hands-on, and she provides valuable feedback to help students improve their design skills."
-      },
-      {
-        "professor": "Dr. Liam Nguyen",
-        "subject": "Differential Equations",
-        "stars": 3,
-        "review": "Dr. Nguyen is knowledgeable, but his lectures can be dry and difficult to follow. The coursework is challenging and there is a lot of emphasis on memorization."
-      },
-      {
-        "professor": "Professor Sophia Garcia",
-        "subject": "Public Speaking",
-        "stars": 4,
-        "review": "Professor Garcia is a great public speaking instructor. She provides helpful feedback and creates a supportive environment for students to develop their presentation skills."
-      },
-      {
-        "professor": "Dr. Emma Patel",
-        "subject": "Developmental Psychology",
-        "stars": 5,
-        "review": "Dr. Patel is an exceptional professor. Her lectures are engaging and she does an excellent job of connecting course material to real-world examples."
-      },
-      {
-        "professor": "Professor Olivia Nguyen",
-        "subject": "Introduction to Creative Writing",
-        "stars": 4,
-        "review": "Professor Nguyen is a talented writer and a caring instructor. Her classes are workshop-based and she provides thoughtful feedback to help students improve their writing."
-      },
-      {
-        "professor": "Dr. Jacob Gonzalez",
-        "subject": "Modern European History",
-        "stars": 4,
-        "review": "Dr. Gonzalez is a knowledgeable and passionate professor. His lectures are well-organized and he encourages students to engage in stimulating discussions."
-      }
+        {
+            "professor": "Dr. Emily Patel",
+            "subject": "Introduction to Computer Science",
+            "stars": 5,
+            "review": "Dr. Patel is an excellent professor who really cares about her students. Her lectures are engaging and she is always available to provide extra help. I learned a lot in this course and would highly recommend it."
+        },
+        {
+            "professor": "Professor John Nguyen",
+            "subject": "Organic Chemistry",
+            "stars": 3,
+            "review": "Professor Nguyen's teaching style is a bit dry and he can be difficult to understand at times. The workload for this course is also quite heavy. However, he is knowledgeable about the subject matter and provides helpful study guides."
+        },
+        {
+            "professor": "Dr. Sarah Hernandez",
+            "subject": "Introduction to Psychology",
+            "stars": 4,
+            "review": "Dr. Hernandez is a passionate and engaging lecturer. She makes the material interesting and relevant to real-world situations. The assignments and exams are challenging but fair. I would recommend this course to anyone interested in psychology."
+        },
+        {
+            "professor": "Professor Michael Goldstein",
+            "subject": "Calculus I",
+            "stars": 2,
+            "review": "I struggled a lot in Professor Goldstein's Calculus I course. He moves through the material quickly and doesn't provide much individual support. The grading is also very strict. I would not recommend this course for students who need extra help in math."
+        },
+        {
+            "professor": "Dr. Olivia Ramirez",
+            "subject": "American Literature",
+            "stars": 4,
+            "review": "Dr. Ramirez is a knowledgeable and passionate professor who brings American literature to life. Her lectures are engaging and she encourages lively class discussions. The reading load is heavy but the assignments are interesting and meaningful."
+        },
+        {
+            "professor": "Professor David Lee",
+            "subject": "Introduction to Business",
+            "stars": 3,
+            "review": "Professor Lee's Introduction to Business course provides a good overview of the subject matter, but his lectures can be dry and monotonous at times. The textbook and course materials are helpful, but I wish there were more interactive elements to the class."
+        },
+        {
+            "professor": "Dr. Aisha Khan",
+            "subject": "Human Anatomy and Physiology",
+            "stars": 5,
+            "review": "Dr. Khan is an exceptional professor who truly cares about her students' learning and success. Her lectures are clear and engaging, and she provides plenty of opportunities for hands-on learning and lab work. This course was challenging but incredibly rewarding."
+        },
+        {
+            "professor": "Professor Maria Gonzalez",
+            "subject": "Introduction to Sociology",
+            "stars": 4,
+            "review": "Professor Gonzalez is a dynamic and thought-provoking lecturer who encourages critical thinking. The course material is relevant and the assignments are interesting. I found this class to be a great introduction to the field of sociology."
+        },
+        {
+            "professor": "Dr. Liam Fitzgerald",
+            "subject": "Environmental Science",
+            "stars": 4,
+            "review": "Dr. Fitzgerald is a knowledgeable and passionate professor who cares deeply about environmental issues. His lectures are informative and he provides ample opportunities for hands-on learning and field work. This course was challenging but incredibly rewarding."
+        },
+        {
+            "professor": "Professor Sophia Chen",
+            "subject": "Principles of Marketing",
+            "stars": 3,
+            "review": "Professor Chen's Principles of Marketing course provides a solid foundation in marketing concepts, but the lectures can be a bit dry at times. The textbook and course materials are helpful, but I wish there were more opportunities for real-world application and case studies."
+        },
+        {
+            "professor": "Dr. Ethan Reyes",
+            "subject": "World History",
+            "stars": 5,
+            "review": "Dr. Reyes is a captivating lecturer who brings history to life. His classes are engaging and thought-provoking, and he encourages students to think critically about the events and themes of world history. The assignments are challenging but rewarding."
+        },
+        {
+            "professor": "Professor Isabella Rossi",
+            "subject": "Introduction to Art History",
+            "stars": 4,
+            "review": "Professor Rossi's Introduction to Art History course provides a comprehensive overview of the subject matter. Her lectures are informative and she encourages students to engage with the material through class discussions and museum visits. The workload is manageable and the assignments are interesting."
+        },
+        {
+            "professor": "Dr. Liam Chen",
+            "subject": "Principles of Economics",
+            "stars": 3,
+            "review": "Dr. Chen's Principles of Economics course covers the core concepts of the discipline, but the lectures can be dry and the material can be challenging to grasp. The textbook and course materials are helpful, but I wish there were more opportunities for practical application and real-world examples."
+        },
+        {
+            "professor": "Professor Amelia Gupta",
+            "subject": "Introduction to Public Speaking",
+            "stars": 5,
+            "review": "Professor Gupta is an exceptional public speaking instructor who truly cares about her students' success. Her teaching style is engaging and she provides ample opportunities for practice and feedback. This course was instrumental in helping me develop my public speaking skills."
+        },
+        {
+            "professor": "Dr. Noah Diaz",
+            "subject": "Developmental Psychology",
+            "stars": 4,
+            "review": "Dr. Diaz's Developmental Psychology course provides a comprehensive understanding of human development across the lifespan. His lectures are informative and he encourages class discussions and critical thinking. The assignments are challenging but relevant to the course material."
+        },
+        {
+            "professor": "Professor Isabella Morales",
+            "subject": "Introduction to Programming",
+            "stars": 3,
+            "review": "Professor Morales' Introduction to Programming course provides a solid foundation in programming concepts, but the pace of the class can be fast and the material can be difficult to grasp at times. The assignments are challenging and the grading can be strict. I would recommend this course for students with some prior programming experience."
+        },
+        {
+            "professor": "Dr. Ethan Fuentes",
+            "subject": "Principles of Management",
+            "stars": 4,
+            "review": "Dr. Fuentes is a knowledgeable and engaging professor who brings real-world examples and case studies into the Principles of Management course. The lectures are informative and he encourages class discussions and group work. The workload is manageable and the assignments are interesting."
+        },
+        {
+            "professor": "Professor Sophia Nguyen",
+            "subject": "Introduction to Philosophy",
+            "stars": 5,
+            "review": "Professor Nguyen's Introduction to Philosophy course is truly exceptional. Her lectures are thought-provoking and she encourages students to engage with the material through class discussions and written assignments. The reading load is heavy, but the course provides a comprehensive overview of the field of philosophy."
+        },
+        {
+            "professor": "Dr. Liam Ramirez",
+            "subject": "Principles of Finance",
+            "stars": 3,
+            "review": "Dr. Ramirez's Principles of Finance course covers the core concepts of finance, but the material can be quite technical and challenging. The lectures can be dry at times, and the assignments require a significant amount of work. I would recommend this course for students with a strong background in math and finance."
+        },
+        {
+            "professor": "Professor Olivia Diaz",
+            "subject": "Introduction to Political Science",
+            "stars": 4,
+            "review": "Professor Diaz's Introduction to Political Science course provides a comprehensive overview of the field. Her lectures are engaging and she encourages class discussions and critical thinking. The reading load is heavy, but the assignments are interesting and relevant to the course material."
+        }
     ]
-  }
+}
