@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { Pinecone } from '@pinecone-database/pinecone'
 import { HfInference } from '@huggingface/inference';
 import Groq from "groq-sdk";
+import fs from 'fs/promises';
+import path from 'path';
 
 
 const systemPrompt = 
@@ -14,9 +16,43 @@ Use them to answer the question if needed. Answer using knowledge given to you O
 const inference = new HfInference(process.env.HUGGINGFACE_API_KEY);
 const pc = new Pinecone({apiKey: process.env.PINECONE_API_KEY});
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-console.log("pinecone apikey:", process.env.PINECONE_API_KEY)
-console.log("hf apikey:", process.env.HUGGINGFACE_API_KEY)
-console.log("groq apikey:", process.env.GROQ_API_KEY)
+
+async function upsertToPinecone(index) {
+    try {
+        const filePath = path.join(process.cwd(), 'reviews.json');
+        const fileContents = await fs.readFile(filePath, 'utf8');
+        const { reviews } = JSON.parse(fileContents);
+
+        const batchSize = 100; // Pinecone recommends batches of 100 or fewer
+        for (let i = 0; i < reviews.length; i += batchSize) {
+            const batch = reviews.slice(i, i + batchSize);
+            console.log('Batch:', batch);
+            const vectors = await Promise.all(batch.map(async (review) => {
+                console.log('Review text:', review.review);
+                const embedding = await inference.featureExtraction({
+                    model: "sentence-transformers/all-MiniLM-L6-v2",
+                    inputs: [review.review],
+                });
+                return {
+                    id: `${review.professor}_${review.subject}`,
+                    values: Array.from(embedding),
+                    metadata: {
+                    professor: review.professor,
+                    subject: review.subject,
+                    stars: review.stars,
+                    review: review.review
+                    }
+                };
+            }));
+            await index.upsert(vectors);
+            console.log(`Upserted batch ${i / batchSize + 1}`);
+        }
+        console.log('All data upserted successfully');
+    } catch (error) {
+        console.error('Error upserting data:', error);
+        throw error;
+    }
+  }
 
 export async function POST(req) {
     const data = await req.json()
@@ -57,6 +93,16 @@ export async function POST(req) {
     }
 
     const index = pc.index(indexName).namespace(namespaceName);
+
+    // if (data.action === 'upsert') {
+    //     await upsertToPinecone(index);
+    //     return new NextResponse(JSON.stringify({ message: 'Data upserted successfully' }), {
+    //       status: 200,
+    //       headers: { 'Content-Type': 'application/json' }
+    //     });
+    // }
+
+    await upsertToPinecone(index);
 
     const text = data[data.length - 1].content
   
