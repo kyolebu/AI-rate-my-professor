@@ -76,6 +76,8 @@ const lastMessage = data[data.length - 1]
 const lastMessageContent = lastMessage.content + resultString
 const lastDataWithoutLastMessage = data.slice(0, data.length - 1)
 
+console.log('test')
+console.log(lastDataWithoutLastMessage)
 const completion = await groq.chat.completions.create({
     messages: [
       {
