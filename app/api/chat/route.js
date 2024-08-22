@@ -14,8 +14,9 @@ Use them to answer the question if needed. Answer using knowledge given to you O
 const inference = new HfInference(process.env.HUGGINGFACE_API_KEY);
 const pc = new Pinecone({apiKey: process.env.PINECONE_API_KEY});
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-
-const index = pc.index('rag').namespace('ns1') // need to change for our specific use case.
+console.log("pinecone apikey:", process.env.PINECONE_API_KEY)
+console.log("hf apikey:", process.env.HUGGINGFACE_API_KEY)
+console.log("groq apikey:", process.env.GROQ_API_KEY)
 
 export async function POST(req) {
     const data = await req.json()
@@ -25,27 +26,38 @@ export async function POST(req) {
     
     const indexName = 'rag';
     const namespaceName = 'ns1';
-    const indexes = await pc.listIndexes();
+    
+    // Fetch all indexes
+    const indexesResponse = await pc.listIndexes();
+    console.log("Indexes Response:", indexesResponse);
 
-    if (Array.isArray(indexes) && !indexes.includes(indexName)) {
+    // Extract the index names
+    const indexNames = indexesResponse.indexes.map(index => index.name);
+    console.log("Extracted Index Names:", indexNames);
+
+    // Check if the index exists
+    const indexExists = indexNames.includes(indexName);
+
+    console.log(`Index ${indexExists ? 'exists' : 'does not exist'}`);
+
+    if (!indexExists) {
         console.log(`Index ${indexName} does not exist. Creating index...`);
         await pc.createIndex({
             name: indexName,
-            dimension: 384, // Depends on embedding model
-            metric: 'cosine', // Depends on embedding model
-            spec: { 
-                serverless: { 
-                    cloud: 'aws', 
-                    region: 'us-east-1' 
-                }
-            }
+            dimension: 384, // Adjust based on your embedding model
+            metric: 'cosine', // Adjust based on your use case
+            spec: {
+                serverless: {
+                    cloud: 'aws',
+                    region: 'us-east-1',
+                },
+            },
         });
         console.log(`Index ${indexName} created successfully.`);
-    } else {
-        console.log(`Index ${indexName} already exists.`);
     }
-  
-  
+
+    const index = pc.index(indexName).namespace(namespaceName);
+
     const text = data[data.length - 1].content
   
     const embedding = await inference.featureExtraction({
