@@ -6,6 +6,13 @@ import fs from 'fs/promises';
 import path from 'path';
 
 
+// const systemPrompt = `
+// You are a Rate My Professor assistant that helps students find classes and professors. You can provide personalized professor recommendations based on user input criteria.
+// For every user question, analyze their requirements and use the top 3 matching professors returned from the vector database to provide recommendations.
+// Consider factors such as subject area, teaching style, difficulty level, and student ratings when making recommendations.
+// Provide concise yet informative answers, and always base your recommendations on the data provided. Do not make up any information.
+// `;
+
 const systemPrompt = 
 `
 You are a rate my professor agent to help students find classes, that takes in user questions and answers them.
@@ -115,6 +122,12 @@ export async function POST(req) {
     const results = await index.query({
         topK: 5,
         vector: embedding,
+        // filter: {
+        //     $and: [
+        //         { stars: { $gte: 4 } }, // Example: filter for professors with 4 or more stars
+        //         // Add more filters based on user input
+        //     ]
+        // },
         includeMetadata: true,
         includeValues: true,
     })
@@ -124,12 +137,23 @@ export async function POST(req) {
         resultString += `\n
         Returned Results:
         Professor: ${match.id}
-        Review: ${match.metadata.stars}
+        Review: ${match.metadata.review}
         Subject: ${match.metadata.subject}
         Stars: ${match.metadata.stars}
         \n\n
         `
     })
+
+    // let resultString = '\n\nRecommended professors based on your criteria:'
+    // results.matches.forEach((match, index) => {
+    //     resultString += `\n
+    //     ${index + 1}. Professor: ${match.metadata.professor}
+    //     Subject: ${match.metadata.subject}
+    //     Rating: ${match.metadata.stars} stars
+    //     Review excerpt: "${match.metadata.review.substring(0, 100)}..."
+    //     `
+    // });
+
     const lastMessage = data[data.length - 1]
     const lastMessageContent = lastMessage.content + resultString
     const lastDataWithoutLastMessage = data.slice(0, data.length - 1)
