@@ -6,19 +6,20 @@ import fs from 'fs/promises';
 import path from 'path';
 
 
-// const systemPrompt = `
-// You are a Rate My Professor assistant that helps students find classes and professors. You can provide personalized professor recommendations based on user input criteria.
-// For every user question, analyze their requirements and use the top 3 matching professors returned from the vector database to provide recommendations.
-// Consider factors such as subject area, teaching style, difficulty level, and student ratings when making recommendations.
-// Provide concise yet informative answers, and always base your recommendations on the data provided. Do not make up any information.
-// `;
+const systemPrompt = `
+You are a Rate My Professor assistant that helps students find classes and professors. You can provide personalized professor recommendations based on user input criteria.
+For every user question, analyze their requirements and use the top 3 matching professors returned from the vector database to provide recommendations.
+Consider factors such as subject area, teaching style, difficulty level, and student ratings when making recommendations.
+Provide concise yet informative answers, and always base your recommendations on the data provided. Do not make up any information. Only look for the information in the data provided.
+If a professor cannot be found with the given subject or rating, respond by saying a matching professor could not be found.
+`;
 
-const systemPrompt = 
-`
-You are a rate my professor agent to help students find classes, that takes in user questions and answers them.
-For every user question, the top 3 professors that match the user question are returned.
-Use them to answer the question if needed. Answer using knowledge given to you ONLY. Do NOT make anything up of your own.
-`
+// const systemPrompt = 
+// `
+// You are a rate my professor agent to help students find classes, that takes in user questions and answers them.
+// For every user question, the top 3 professors that match the user question are returned.
+// Use them to answer the question if needed. Answer using knowledge given to you ONLY. Do NOT make anything up of your own.
+// `
 
 const inference = new HfInference(process.env.HUGGINGFACE_API_KEY);
 const pc = new Pinecone({apiKey: process.env.PINECONE_API_KEY});
@@ -111,50 +112,65 @@ export async function POST(req) {
 
     await upsertToPinecone(index);
 
-    const text = data[data.length - 1].content
+    const lastMessage = data[data.length - 1]
+    const text = lastMessage.content
+    const criteria = lastMessage.criteria || {};
+
+    console.log("criteria: ", criteria)
   
     const embedding = await inference.featureExtraction({
         model: "sentence-transformers/all-MiniLM-L6-v2",
         inputs: text,
     });
-  
-  
-    const results = await index.query({
+
+    let filter = {};
+    if (criteria.subject) {
+        filter.subject = criteria.subject;
+    }
+    if (criteria.minRating) {
+        filter.stars = { $gte: criteria.minRating };
+    }
+
+    console.log("filter: ", filter)
+    
+    let queryParams = {
         topK: 5,
         vector: embedding,
-        // filter: {
-        //     $and: [
-        //         { stars: { $gte: 4 } }, // Example: filter for professors with 4 or more stars
-        //         // Add more filters based on user input
-        //     ]
-        // },
         includeMetadata: true,
         includeValues: true,
-    })
+    };
+
+    // Only add the filter if it's not empty
+    if (Object.keys(filter).length > 0) {
+        queryParams.filter = filter;
+    }
   
-    let resultString = '\n\nReturned results from vector db (done automatically)'
-    results.matches.forEach((match) => {
-        resultString += `\n
-        Returned Results:
-        Professor: ${match.id}
-        Review: ${match.metadata.review}
-        Subject: ${match.metadata.subject}
-        Stars: ${match.metadata.stars}
-        \n\n
-        `
-    })
-
-    // let resultString = '\n\nRecommended professors based on your criteria:'
-    // results.matches.forEach((match, index) => {
+    const results = await index.query(queryParams)
+  
+    // let resultString = '\n\nReturned results from vector db (done automatically)'
+    // results.matches.forEach((match) => {
     //     resultString += `\n
-    //     ${index + 1}. Professor: ${match.metadata.professor}
+    //     Returned Results:
+    //     Professor: ${match.id}
+    //     Review: ${match.metadata.review}
     //     Subject: ${match.metadata.subject}
-    //     Rating: ${match.metadata.stars} stars
-    //     Review excerpt: "${match.metadata.review.substring(0, 100)}..."
+    //     Stars: ${match.metadata.stars}
+    //     \n\n
     //     `
-    // });
+    // })
 
-    const lastMessage = data[data.length - 1]
+    let resultString = '\n\nRecommended professors based on your criteria:'
+    results.matches.forEach((match, index) => {
+        resultString += `\n
+        ${index + 1}. Professor: ${match.metadata.professor}
+        Subject: ${match.metadata.subject}
+        Rating: ${match.metadata.stars} stars
+        Review excerpt: "${match.metadata.review.substring(0, 100)}..."
+        `
+    });
+
+    console.log(resultString)
+
     const lastMessageContent = lastMessage.content + resultString
     const lastDataWithoutLastMessage = data.slice(0, data.length - 1)
   

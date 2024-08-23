@@ -11,7 +11,32 @@ export default function Home() {
   ])
   const [message, setMessage] = useState('')
 
+  const parseUserCriteria = (message) => {
+    const criteria = {
+      subject: null,
+      minRating: null,
+    };
+
+    function extractValue(message, key) {
+      const regex = new RegExp(`${key}:\\s*\\[(.*?)\\]`, 'i');
+      const match = message.match(regex);
+      return match ? match[1].trim() : null;
+    }
+  
+    if (message.toLowerCase().includes('subject:')) {
+      criteria.subject = extractValue(message, 'subject');
+    }
+    if (message.toLowerCase().includes('rating:')) {
+      criteria.minRating = parseInt(extractValue(message, 'rating') || '0');
+    }
+
+    console.log(criteria)
+  
+    return criteria;
+  };
+
   const sendMessage = async () => {
+    const criteria = parseUserCriteria(message);
     
     setMessages((messages) => [
       ...messages,
@@ -25,7 +50,7 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify([...messages, {role: 'user', content: message}]),
+      body: JSON.stringify([...messages, {role: 'user', content: message, criteria}]),
     }).then(async (res) => {
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
@@ -101,6 +126,7 @@ export default function Home() {
             fullWidth
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            helperText="Try: 'Find a professor for subject: [Math], rating: [4]'"
           />
           <Button style={{ backgroundColor: "#FF4433" }} variant="contained" onClick={sendMessage}>
             Send
