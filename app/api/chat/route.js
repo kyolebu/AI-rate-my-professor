@@ -159,15 +159,20 @@ export async function POST(req) {
     //     `
     // })
 
-    let resultString = '\n\nRecommended professors based on your criteria:'
-    results.matches.forEach((match, index) => {
-        resultString += `\n
-        ${index + 1}. Professor: ${match.metadata.professor}
-        Subject: ${match.metadata.subject}
-        Rating: ${match.metadata.stars} stars
-        Review excerpt: "${match.metadata.review.substring(0, 100)}..."
-        `
-    });
+    let resultString = '';
+    if (results.matches.length === 0) {
+        resultString = 'The criteria does not match any professor.';
+    } else {
+        resultString = '\n\nRecommended professors based on your criteria:';
+        results.matches.forEach((match, index) => {
+            resultString += `\n
+            ${index + 1}. Professor: ${match.metadata.professor}
+            Subject: ${match.metadata.subject}
+            Rating: ${match.metadata.stars} stars
+            Review excerpt: "${match.metadata.review.substring(0, 100)}..."
+            `;
+        });
+    }
 
     console.log(resultString)
 
