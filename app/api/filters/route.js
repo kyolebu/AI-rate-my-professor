@@ -40,48 +40,39 @@ export async function GET(req) {
     // );
     try {
         const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY });
-        const indexName = 'rag'; // Replace with your actual index name
+        const indexName = 'company-reviews'; // Replace with your actual index name
         const namespaceName = 'ns1'; // Replace with your actual namespace if applicable
 
         const index = pc.index(indexName).namespace(namespaceName);
 
-        let subjectsSet = new Set();
-        let offset = 0;
-        const batchSize = 100;
+        // Fetch companies
+        const statsResponse = await index.describeIndexStats();
+        console.log('Stats response:', statsResponse); // Log the entire response
 
-        while (true) {
-            const results = await index.query({
-                topK: batchSize, // Fetch batchSize results at a time
-                vector: Array(384).fill(0), // Dummy vector for querying
+        let companies = [];
+        if (statsResponse && statsResponse.dimension) {
+            // If we can't get companies from metadata, we'll fetch them from the actual data
+            const queryResponse = await index.query({
+                topK: 150, // Adjust based on your needs
                 includeMetadata: true,
-                includeValues: false, // Skip vectors to minimize payload size
+                vector: new Array(statsResponse.dimension).fill(0) // Create a zero vector of the correct dimension
             });
 
-            if (results.matches.length === 0) {
-                break; // No more subjects to fetch
-            }
-
-            results.matches.forEach(match => {
-                const subject = match.metadata.subject;
-                if (subject) {
-                    subjectsSet.add(subject);
-                }
-            });
-
-            if (results.matches.length < batchSize) {
-                break; // Stop if fewer results than the batch size indicate we've fetched all data
-            }
-
-            offset += batchSize;
+            companies = [...new Set(queryResponse.matches.map(match => match.metadata.company))];
         }
 
-        const subjects = Array.from(subjectsSet);
-        
-        const ratings = [1, 2, 3, 4, 5]; // Assuming ratings are standard
+        // // Fetch companies (assuming they're stored in metadata)
+        // const companiesResponse = await index.describeIndexStats({
+        //     includeMetadataFields: ['company'],
+        // });
+        // const companies = companiesResponse.stats.metadataFields.company.values;
+
+        // Ratings are now from 1 to 5 in increments of 0.5
+        const ratings = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
 
         return new Response(
             JSON.stringify({
-                subjects,
+                companies,
                 ratings,
             }),
             {
@@ -92,9 +83,9 @@ export async function GET(req) {
             }
         );
     } catch (error) {
-        console.error('Error retrieving subjects:', error);
+        console.error('Error retrieving filters:', error);
         return new Response(
-            JSON.stringify({ error: 'Failed to retrieve subjects' }),
+            JSON.stringify({ error: 'Failed to retrieve filters' }),
             {
                 status: 500,
                 headers: {

@@ -7,11 +7,11 @@ import path from 'path';
 
 
 const systemPrompt = `
-You are a Rate My Professor assistant that helps students find classes and professors. You can provide personalized professor recommendations based on user input criteria.
-For every user question, analyze their requirements and use the top 3 matching professors returned from the vector database to provide recommendations.
-Consider factors such as subject area, teaching style, difficulty level, and student ratings when making recommendations.
+You are a Company Review assistant that helps users find companies and their ratings. You can provide personalized company recommendations based on user input criteria.
+For every user question, analyze their requirements and use the top 3 matching companies returned from the vector database to provide recommendations.
+Consider factors such as role, pros, cons, and review ratings when making recommendations.
 Provide concise yet informative answers, and always base your recommendations on the data provided. Do not make up any information. Only look for the information in the data provided.
-If a professor cannot be found with the given subject or rating, respond by saying a matching professor could not be found.
+If a company cannot be found with the given role or rating, respond by saying a matching company could not be found.
 `;
 
 // const systemPrompt = 
@@ -27,33 +27,59 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 async function upsertToPinecone(index) {
     try {
-        const filePath = path.join(process.cwd(), 'reviews.json');
+        const filePath = path.join(process.cwd(), 'company_reviews.json');
+        console.log('Attempting to read file:', filePath);
+
         const fileContents = await fs.readFile(filePath, 'utf8');
-        const { reviews } = JSON.parse(fileContents);
+        console.log('File contents read successfully');
+
+        let reviewsData;
+        try {
+            reviewsData = JSON.parse(fileContents);
+            console.log('JSON parsed successfully');
+        } catch (parseError) {
+            console.error('Error parsing JSON:', parseError);
+            throw new Error('Failed to parse JSON data');
+        }
+
+        if (!reviewsData || typeof reviewsData !== 'object') {
+            throw new Error('Invalid data structure in JSON file');
+        }
 
         const batchSize = 100; // Pinecone recommends batches of 100 or fewer
-        for (let i = 0; i < reviews.length; i += batchSize) {
-            const batch = reviews.slice(i, i + batchSize);
-            console.log('Batch:', batch);
-            const vectors = await Promise.all(batch.map(async (review) => {
-                console.log('Review text:', review.review);
-                const embedding = await inference.featureExtraction({
-                    model: "sentence-transformers/all-MiniLM-L6-v2",
-                    inputs: [review.review],
-                });
-                return {
-                    id: `${review.professor}_${review.subject}`,
-                    values: Array.from(embedding),
-                    metadata: {
-                    professor: review.professor,
-                    subject: review.subject,
-                    stars: review.stars,
-                    review: review.review
-                    }
-                };
-            }));
-            await index.upsert(vectors);
-            console.log(`Upserted batch ${i / batchSize + 1}`);
+        let totalUpserted = 0;
+
+        for (const [company, reviews] of Object.entries(reviewsData)) {
+            for (let i = 0; i < reviews.length; i += batchSize) {
+                const batch = reviews.slice(i, i + batchSize);
+                const vectors = await Promise.all(batch.map(async (review, reviewIndex) => {
+                    // Combine all text fields for embedding
+                    const reviewText = `${review.reviewTitle} ${review.reviewerRole} ${review.reviewPros} ${review.reviewCons}`;
+                    
+                    const embedding = await inference.featureExtraction({
+                        model: "sentence-transformers/all-MiniLM-L6-v2",
+                        inputs: [reviewText],
+                    });
+
+                    return {
+                        id: `${company}_${i + reviewIndex}`, // Unique ID for each review
+                        values: Array.from(embedding),
+                        metadata: {
+                            company: company,
+                            reviewTitle: review.reviewTitle,
+                            reviewRating: parseFloat(review.reviewRating),
+                            reviewDate: review.reviewDate,
+                            reviewerRole: review.reviewerRole,
+                            reviewPros: review.reviewPros,
+                            reviewCons: review.reviewCons
+                        }
+                    };
+                }));
+
+                await index.upsert(vectors);
+                totalUpserted += vectors.length;
+                console.log(`Upserted batch for ${company}: ${totalUpserted} reviews`);
+            }
         }
         console.log('All data upserted successfully');
     } catch (error) {
@@ -68,7 +94,7 @@ export async function POST(req) {
       apiKey: process.env.PINECONE_API_KEY,
     })
     
-    const indexName = 'rag';
+    const indexName = 'company-reviews';
     const namespaceName = 'ns1';
     
     // Fetch all indexes
@@ -124,11 +150,11 @@ export async function POST(req) {
     });
 
     let filter = {};
-    if (criteria.subject) {
-        filter.subject = criteria.subject;
+    if (criteria.company) {
+        filter.company = criteria.company;
     }
     if (criteria.minRating) {
-        filter.stars = { $gte: criteria.minRating };
+        filter.reviewRating = { $gte: criteria.minRating };
     }
 
     console.log("filter: ", filter)
@@ -161,15 +187,18 @@ export async function POST(req) {
 
     let resultString = '';
     if (results.matches.length === 0) {
-        resultString = 'The criteria does not match any professor.';
+        resultString = 'No reviews match the given criteria.';
     } else {
-        resultString = '\n\nRecommended professors based on your criteria:';
+        resultString = '\n\nRelevant reviews based on your criteria';
         results.matches.forEach((match, index) => {
             resultString += `\n
-            ${index + 1}. Professor: ${match.metadata.professor}
-            Subject: ${match.metadata.subject}
-            Rating: ${match.metadata.stars} stars
-            Review: "${match.metadata.review}..."
+            ${index + 1}. Company: ${match.metadata.company}
+            Review Title: ${match.metadata.reviewTitle}
+            Rating: ${match.metadata.reviewRating} stars
+            Date: ${match.metadata.reviewDate}
+            Reviewer Role: ${match.metadata.reviewerRole}
+            Pros: "${match.metadata.reviewPros}"
+            Cons: "${match.metadata.reviewCons}"
             `;
         });
     }

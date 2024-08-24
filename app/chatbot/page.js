@@ -11,7 +11,7 @@ export default function Home() {
     },
   ])
   const [message, setMessage] = useState('')
-  const [filters, setFilters] = useState({ subject: '', minRating: '' });
+  const [filters, setFilters] = useState({ role: '', minRating: '' });
 
   // const parseUserCriteria = (message) => {
   //   const criteria = {
@@ -133,7 +133,7 @@ export default function Home() {
             fullWidth
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            helperText="Try: 'Find a professor for subject: [Math], rating: [4]'"
+            helperText="Ask about company reviews or filter by company and rating"
           />
           <Button style={{ backgroundColor: "#FF4433" }} variant="contained" onClick={sendMessage}>
             Send
