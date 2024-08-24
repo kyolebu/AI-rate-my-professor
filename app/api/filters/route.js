@@ -1,48 +1,32 @@
 import { Pinecone } from '@pinecone-database/pinecone';
 
-// export default async function handler(req, res) {
-//     const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY });
-//     const index = pc.index('rag').namespace('ns1');
-
-//     const subjectsResponse = await index.describeIndexStats({
-//         includeMetadataFields: ['subject'],
-//     });
-
-//     const ratingsResponse = await index.describeIndexStats({
-//         includeMetadataFields: ['stars'],
-//     });
-
-//     const subjects = subjectsResponse.stats.metadataFields.subject.values;
-//     const ratings = ratingsResponse.stats.metadataFields.stars.values;
-
-//     res.status(200).json({
-//         subjects,
-//         ratings,
-//     });
-// }
 
 export async function GET(req) {
-    // // Example data - you should replace this with actual data from Pinecone or another source
-    // const subjects = ["Math", "Environmental Science", "World History"]; 
-    // const ratings = [1, 2, 3, 4, 5];
-
-    // return new Response(
-    //     JSON.stringify({
-    //         subjects,
-    //         ratings,
-    //     }),
-    //     {
-    //         status: 200,
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //     }
-    // );
+    
     try {
         const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY });
         const indexName = 'company-reviews'; // Replace with your actual index name
         const namespaceName = 'ns1'; // Replace with your actual namespace if applicable
 
+         // Check if the index exists
+        const indexesResponse = await pc.listIndexes();
+        const indexNames = indexesResponse.indexes.map(index => index.name);
+        const indexExists = indexNames.includes(indexName);
+
+        if (!indexExists) {
+            console.log(`Index ${indexName} does not exist. Creating index...`);
+            await pc.createIndex({
+                name: indexName,
+                dimension: 384, // Adjust based on your embedding model
+                metric: 'cosine', // Adjust based on your use case
+                spec: {
+                    serverless: {
+                        cloud: 'aws',
+                        region: 'us-east-1',
+                    },
+                },
+            });
+        }
         const index = pc.index(indexName).namespace(namespaceName);
 
         // Fetch companies

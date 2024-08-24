@@ -1,5 +1,5 @@
 'use client'
-import { Box, Button, Stack, TextField } from '@mui/material'
+import { Box, Button, Stack, TextField, Typography } from '@mui/material'
 import { useState } from 'react'
 import FilterComponent from '../components/FilterComponent'
 
@@ -11,40 +11,58 @@ export default function Home() {
     },
   ])
   const [message, setMessage] = useState('')
-  const [filters, setFilters] = useState({ role: '', minRating: '' });
+  const [filters, setFilters] = useState({ role: '', minRating: '' })
+  const [searchCompany, setSearchCompany] = useState('')
 
-  // const parseUserCriteria = (message) => {
-  //   const criteria = {
-  //     subject: null,
-  //     minRating: null,
-  //   };
+  // Function to handle sending company name for scraping
+  const handleSearchCompany = async () => {
+    if (!searchCompany) {
+      alert('Please enter a company name')
+      return
+    }
 
-  //   function extractValue(message, key) {
-  //     const regex = new RegExp(`${key}:\\s*\\[(.*?)\\]`, 'i');
-  //     const match = message.match(regex);
-  //     return match ? match[1].trim() : null;
-  //   }
-  
-  //   if (message.toLowerCase().includes('subject:')) {
-  //     criteria.subject = extractValue(message, 'subject');
-  //   }
-  //   if (message.toLowerCase().includes('rating:')) {
-  //     criteria.minRating = parseInt(extractValue(message, 'rating') || '0');
-  //   }
+    // Send the company name to your backend
+    try {
+      const response = await fetch('/api/search-company', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ companyName: searchCompany }),
+      })
 
-  //   console.log(criteria)
-  
-  //   return criteria;
-  // };
+      const data = await response.json()
+      
+      // This is for debugging. Remove this after successful test
+
+      if (response.ok) {
+        setMessages((messages) => [
+          ...messages,
+          { role: 'user', content: `Searching for reviews of ${searchCompany}` },
+          { role: 'assistant', content: 'Scraping data...' },
+        ])
+        setSearchCompany('')
+      } else {
+        setMessages((messages) => [
+          ...messages,
+          { role: 'assistant', content: `Error: ${data.error}` },
+        ])
+      }
+    } catch (error) {
+      setMessages((messages) => [
+        ...messages,
+        { role: 'assistant', content: `Error: ${error.message}` },
+      ])
+    }
+  }
 
   const sendMessage = async () => {
-    // const criteria = parseUserCriteria(message);
-    const criteria = { ...filters };
+    const criteria = { ...filters }
     
     setMessages((messages) => [
       ...messages,
-      {role: 'user', content: message},
-      {role: 'assistant', content: ''},
+      { role: 'user', content: message },
+      { role: 'assistant', content: '' },
     ])
     
     setMessage('')
@@ -53,47 +71,73 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify([...messages, {role: 'user', content: message, criteria}]),
+      body: JSON.stringify([...messages, { role: 'user', content: message, criteria }]),
     }).then(async (res) => {
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
       let result = ''
   
-      return reader.read().then(function processText({done, value}) {
+      return reader.read().then(function processText({ done, value }) {
         if (done) {
           return result
         }
-        const text = decoder.decode(value || new Uint8Array(), {stream: true})
+        const text = decoder.decode(value || new Uint8Array(), { stream: true })
         setMessages((messages) => {
           let lastMessage = messages[messages.length - 1]
           let otherMessages = messages.slice(0, messages.length - 1)
           return [
             ...otherMessages,
-            {...lastMessage, content: lastMessage.content + text},
+            { ...lastMessage, content: lastMessage.content + text },
           ]
         })
         return reader.read().then(processText)
       })
     })
   }
+
   return (
     <Box
       width="100vw"
       height="100vh"
       display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
+      flexDirection="row"
+      alignItems="flex-start"
       sx={{
         pt: { xs: '120px', sm: '80px' }, // Add top padding to accommodate the fixed filter
       }}
     >
-      <FilterComponent onFilterChange={(filters) => setFilters(filters)} />
+      <Box
+        width="300px"
+        height="100vh"
+        display="flex"
+        flexDirection="column"
+        p={2}
+        borderRight="1px solid black"
+      >
+        <Typography variant="h6" mb={2}>
+          Retrieve company data
+        </Typography>
+        <TextField
+          label="Search Company"
+          value={searchCompany}
+          onChange={(e) => setSearchCompany(e.target.value)}
+          fullWidth
+          sx={{ mb: 2 }}
+        />
+        <Button 
+          style={{ backgroundColor: "#FF4433" }} 
+          variant="contained" 
+          onClick={handleSearchCompany}
+        >
+          Search Company
+        </Button>
+        <FilterComponent onFilterChange={(filters) => setFilters(filters)} />
+      </Box>
       <Stack
         direction={'column'}
-        width="500px"
-        height="700px"
-        border="1px solid black"
+        width="calc(100% - 300px)"
+        height="100vh"
+        borderLeft="1px solid black"
         p={2}
         spacing={3}
       >
@@ -127,6 +171,7 @@ export default function Home() {
             </Box>
           ))}
         </Stack>
+        
         <Stack direction={'row'} spacing={2}>
           <TextField
             label="Message"
@@ -135,7 +180,11 @@ export default function Home() {
             onChange={(e) => setMessage(e.target.value)}
             helperText="Ask about company reviews or filter by company and rating"
           />
-          <Button style={{ backgroundColor: "#FF4433" }} variant="contained" onClick={sendMessage}>
+          <Button 
+            style={{ backgroundColor: "#FF4433" }} 
+            variant="contained" 
+            onClick={sendMessage}
+          >
             Send
           </Button>
         </Stack>

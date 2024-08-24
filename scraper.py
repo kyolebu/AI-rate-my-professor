@@ -3,129 +3,144 @@ import webbrowser
 import time
 from dotenv import load_dotenv
 import os
+import sys
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
 
 load_dotenv()
+@app.route('/search-company', methods=['POST'])
+def search_company():
+    data = request.json
+    company_name = data.get('companyName', '')
 
-# Open the JavaScript file
+    if not company_name:
+        return jsonify({'error': 'Company name is required'}), 400
 
-'''
-# Open up file to copy code
-pyautogui.hotkey('win', 'e')
-
-
-time.sleep(15)
-
-# Type file path in the home searchbar in file explorer and Focus on the address bar (Ctrl + L or Alt + D)
-
-pyautogui.hotkey('ctrl', 'l')  # You can also use 'alt', 'd' depending on your version
-time.sleep(3)
-pyautogui.write(os.getenv("TOOL_SCRAPE_PATH"))
-time.sleep(5)
-pyautogui.press('enter')  # Execute
-
-print("Clicked on file of interest holding the JS code")
+    print(f"Scraping data for {company_name}")
 
 
-time.sleep(15)
+    # Open up file to copy code
+    pyautogui.hotkey('win', 'e')
 
 
-# Select all content and copy
-pyautogui.hotkey('ctrl', 'a')  # Select all
-pyautogui.hotkey('ctrl', 'c')  # Copy
-time.sleep(5)
-'''
+    time.sleep(15)
 
-# Open the Glassdoor login page in the default web browser
-webbrowser.open('https://www.glassdoor.com/profile/login_input.htm')
+    # Type file path in the home searchbar in file explorer and Focus on the address bar (Ctrl + L or Alt + D)
 
-# Wait for the page to load
-time.sleep(10)
+    pyautogui.hotkey('ctrl', 'l')  # You can also use 'alt', 'd' depending on your version
+    time.sleep(3)
+    pyautogui.write(os.getenv("TOOL_SCRAPE_PATH"))
+    time.sleep(5)
+    pyautogui.press('enter')  # Execute
 
-# Click "Sign in with Google"
-pyautogui.moveRel(-500,-500)  # Move left by -200 pixels
-time.sleep(5)
-pyautogui.click()
-for _ in range(3):
-    pyautogui.press('tab')
+    print("Clicked on file of interest holding the JS code")
 
-pyautogui.press('enter')
 
-# Add a delay if necessary for the new page to load
-time.sleep(5)
+    time.sleep(15)
 
-# Click "Log in with Fireside"
-fireside_location = pyautogui.locateCenterOnScreen(os.getenv("FIRESIDE_GMAIL"), confidence=0.6)
-if fireside_location is not None:
-    pyautogui.click(fireside_location)
-    print("Clicked on 'Log in with Fireside' button")
-else:
-    print("Could not find the 'Sign in with Fireside' button on the screen")
 
-time.sleep(5)
+    # Select all content and copy
+    pyautogui.hotkey('ctrl', 'a')  # Select all
+    pyautogui.hotkey('ctrl', 'c')  # Copy
+    time.sleep(5)
 
-# Click "Continue"
-for _ in range(6):
-    pyautogui.press('tab')
 
-pyautogui.press('enter')
+    # Open the Glassdoor login page in the default web browser
+    webbrowser.open('https://www.glassdoor.com/profile/login_input.htm')
 
-time.sleep(5)
+    # Wait for the page to load
+    time.sleep(10)
 
-# Click "Companies"
-for _ in range(6):
-    pyautogui.press('tab')
+    # Click "Sign in with Google"
+    pyautogui.moveRel(-500,-500)  # Move left by -200 pixels
+    time.sleep(5)
+    pyautogui.click()
+    for _ in range(3):
+        pyautogui.press('tab')
 
-pyautogui.press('enter')
+    pyautogui.press('enter')
 
-time.sleep(5)
+    # Add a delay if necessary for the new page to load
+    time.sleep(5)
 
-# Get to the company search
-for _ in range(17):
-    pyautogui.press('tab')
+    # Click "Log in with Fireside"
+    fireside_location = pyautogui.locateCenterOnScreen(os.getenv("FIRESIDE_GMAIL"), confidence=0.6)
+    if fireside_location is not None:
+        pyautogui.click(fireside_location)
+        print("Clicked on 'Log in with Fireside' button")
+    else:
+        print("Could not find the 'Sign in with Fireside' button on the screen")
+
+    time.sleep(5)
+
+    # Click "Continue"
+    for _ in range(6):
+        pyautogui.press('tab')
+
+    pyautogui.press('enter')
+
+    time.sleep(5)
+
+    # Click "Companies"
+    for _ in range(6):
+        pyautogui.press('tab')
+
+    pyautogui.press('enter')
+
+    time.sleep(5)
+
+    # Get to the company search
+    for _ in range(17):
+        pyautogui.press('tab')
     
 
-time.sleep(2)
+    time.sleep(2)
 
-# Type the search query
-search_query = 'Amazon'
-pyautogui.write(search_query)
-time.sleep(2)
-# Click "Search"
-pyautogui.press('tab')
-pyautogui.press('enter')
-time.sleep(5)
-
-    
-
-
-# Now this code will only work for large companies like Amazon, Google, etc because multiple searches will show up.
-# Get to the company search
-pyautogui.click()
-pyautogui.press('tab')
-time.sleep(1)
-pyautogui.press('enter')
-time.sleep(5)
-
-# Now get to review page
-pyautogui.click()
-for _ in range(5):
+    # Type the search query
+    #search_query = 'Amazon'
+    pyautogui.write(company_name)
+    time.sleep(2)
+    # Click "Search"
     pyautogui.press('tab')
+    pyautogui.press('enter')
+    time.sleep(5)
+
     
-pyautogui.press('enter')
-time.sleep(5)
 
-# Open console. Works for default edge browser for windows
-print('Time to open console')
-pyautogui.hotkey('ctrl', 'shift', 'j')
-time.sleep(15)
 
-# Paste the JavaScript code into the console
-pyautogui.press('tab')
-pyautogui.hotkey('ctrl', 'v')  # Paste
-pyautogui.press('enter')  # Execute
-time.sleep(50)  # Wait for execution
+    # Now this code will only work for large companies like Amazon, Google, etc because multiple searches will show up.
+    # Get to the company search
+    pyautogui.click()
+    pyautogui.press('tab')
+    time.sleep(1)
+    pyautogui.press('enter')
+    time.sleep(5)
 
-# Close the console
-pyautogui.hotkey('ctrl', 'shift', 'j')
+    # Now get to review page
+    pyautogui.click()
+    for _ in range(5):
+        pyautogui.press('tab')
+    
+    pyautogui.press('enter')
+    time.sleep(5)
 
-print("Script executed and JavaScript run.")
+    # Open console. Works for default edge browser for windows
+    print('Time to open console')
+    pyautogui.hotkey('ctrl', 'shift', 'j')
+    time.sleep(15)
+
+    # Paste the JavaScript code into the console
+    pyautogui.press('tab')
+    pyautogui.hotkey('ctrl', 'v')  # Paste
+    pyautogui.press('enter')  # Execute
+    time.sleep(50)  # Wait for execution
+
+    # Close the console
+    pyautogui.hotkey('ctrl', 'shift', 'j')
+
+    print("Script executed and JavaScript run.")
+    return jsonify({'message': 'Scraping completed successfully'})
+
+if __name__ == '__main__':
+    app.run(port=5000)
