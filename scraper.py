@@ -42,8 +42,8 @@ webbrowser.open('https://www.glassdoor.com/profile/login_input.htm')
 time.sleep(10)
 
 # Click "Sign in with Google"
-pyautogui.moveRel(-100, -50)  # Move left by -100 pixels
-
+pyautogui.moveRel(-500,-500)  # Move left by -200 pixels
+time.sleep(5)
 pyautogui.click()
 for _ in range(3):
     pyautogui.press('tab')
@@ -64,71 +64,66 @@ else:
 time.sleep(5)
 
 # Click "Continue"
-continue_location = pyautogui.locateCenterOnScreen(os.getenv("CONTINUE"), confidence=0.6)
-if continue_location is not None:
-    pyautogui.click(continue_location)
-    print("Clicked on 'Continue' button")
-else:
-    print("Could not find the 'Continue' button on the screen")
+for _ in range(6):
+    pyautogui.press('tab')
 
-time.sleep(5)
-
-# Click "Companies"
-companies_location = pyautogui.locateCenterOnScreen(os.getenv("COMPANIES"), confidence=0.6)
-if companies_location is not None:
-    pyautogui.click(companies_location)
-    print("Clicked on companies tab")
-else:
-    print("Could not find the 'Companies' tab on the screen")
-
-time.sleep(5)
-
-# Trigger the Find dialog with Control+F
-pyautogui.hotkey('ctrl', 'f')
-
-# Add a short delay to ensure the Find dialog has time to open
-time.sleep(1)
-
-
-pyautogui.write("Have an employer in mind?")
-
-# Optionally, press Enter to execute the search if needed
 pyautogui.press('enter')
 
+time.sleep(5)
+
 # Click "Companies"
-companies = pyautogui.locateCenterOnScreen(os.getenv("SEARCH_COMPANIES"), confidence=0.6)
-if companies is not None:
-    pyautogui.click(companies)
-    print("Clicked on search companies field")
-else:
-    print("Could not find the search companies field on the screen")
+for _ in range(6):
+    pyautogui.press('tab')
+
+pyautogui.press('enter')
 
 time.sleep(5)
+
+# Get to the company search
+for _ in range(17):
+    pyautogui.press('tab')
+    
+
+time.sleep(2)
+
 # Type the search query
 search_query = 'Amazon'
 pyautogui.write(search_query)
-
-# Click "Search"
-search = pyautogui.locateCenterOnScreen(os.getenv("SEARCH"), confidence=0.6)
-if companies is not None:
-    pyautogui.click(search)
-    print("Clicked on search tab")
-else:
-    print("Could not find the 'search' tab on the screen")
-
-
-
-# Open the browser console using keyboard shortcut
-pyautogui.hotkey('ctrl', 'shift', 'j')
-time.sleep(2)  # Allow time for the console to open
-
-pyautogui.click()
 time.sleep(2)
+# Click "Search"
+pyautogui.press('tab')
+pyautogui.press('enter')
+time.sleep(5)
+
     
+
+
+# Now this code will only work for large companies like Amazon, Google, etc because multiple searches will show up.
+# Get to the company search
+pyautogui.click()
+pyautogui.press('tab')
+time.sleep(1)
+pyautogui.press('enter')
+time.sleep(5)
+
+# Now get to review page
+pyautogui.click()
+for _ in range(5):
+    pyautogui.press('tab')
+    
+pyautogui.press('enter')
+time.sleep(5)
+
+# Open console. Works for default edge browser for windows
+print('Time to open console')
+pyautogui.hotkey('ctrl', 'shift', 'j')
+time.sleep(15)
+
 # Paste the JavaScript code into the console
+pyautogui.press('tab')
 pyautogui.hotkey('ctrl', 'v')  # Paste
 pyautogui.press('enter')  # Execute
-time.sleep(5)  # Wait for execution
+time.sleep(50)  # Wait for execution
 
 # Close the console
 pyautogui.hotkey('ctrl', 'shift', 'j')
