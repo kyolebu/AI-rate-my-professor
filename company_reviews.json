@@ -1,0 +1,884 @@
+{
+    "Amazon": [
+        {
+        "reviewTitle": "not concerned about employees",
+        "reviewRating": "2.0",
+        "reviewDate": "Aug 16, 2024",
+        "reviewerRole": "Warehouse worker",
+        "reviewPros": "benefits- health care options, dential and eye care 401K easy work offer tuition",
+        "reviewCons": "safety hazard, items falling out shelves and hitting associate, on site AMCARE blames the assoicate, dont want to treat injuries Maxed out vaction and pay after 3 years untrained management just a number"
+        },
+        {
+        "reviewTitle": "Great company to gain experience",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 17, 2024",
+        "reviewerRole": "Operations manager",
+        "reviewPros": "-University hire program -Stock options -4 days a week -an okay 401k and insurance plan (better then other places) -Work with people -Focused on development (if you have good leadership) -many locations in case transfer is wanted",
+        "reviewCons": "-Under paid -Peak/prime work over time with no extra pay -If you want to be good/promote you have to work outside work hours"
+        },
+        {
+        "reviewTitle": "Good pay but they work you a lot",
+        "reviewRating": "2.0",
+        "reviewDate": "Apr 23, 2024",
+        "reviewerRole": "Warehouse picker/packer",
+        "reviewPros": "Not bad pay and they give you paid time off. Not much but I think last time I work there they give you like 2-3 paid days off. I did have a cool manager named Brandon. He was really understanding and would stand up for me if anyone tried to get on me for taking too long in the bathroom cause my time off task or whatever they call it was like 5-10 mins and the reason it was even that long was because its hard to find a bathroom in the warehouse I worked in.",
+        "reviewCons": "Barely any paid time off, you won't have much of a social life and your life will only be working for them and not getting time to hang out with friends, so not trying to be mean but if you don't have many friends and are fine working so hard that you pass out by the time you get food and eat and settle down then this job for you. If you do have a life with lots of friends and family. I'd suggest trying something else unless you are desperate for money. As they will boot you out if you get injured, lose your car. Anything bad that happens they don't care. You've become a burden and they just throw you out like garbage. Take it from someone they work so hard I pretty much messed my left arm up and they threw me out like garbage. The only reason I even did the job was because I was desperate for $$$$."
+        },
+        {
+        "reviewTitle": "It's what you make it.",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 16, 2024",
+        "reviewerRole": "Returns processor",
+        "reviewPros": "Flexible hours, good health benefits.",
+        "reviewCons": "10 hour shifts too long. Mostly automated processes.For example 6 minutes late bad you need to use PTO, 5 minutes late you're within the grace period. Request for vacation put in before 24 hours automatically approved but after 24 hours you'll probably have to talk to somebody."
+        },
+        {
+        "reviewTitle": "Great pay and opportunities, poor WLB",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Software development engineer",
+        "reviewPros": "Pay is very competitive and there are a lot of opportunities for learning and growth career wise.",
+        "reviewCons": "WLB is not the best, sometimes needing to work late in the evenings."
+        },
+        {
+        "reviewTitle": "Amazon SMF6",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 7, 2024",
+        "reviewerRole": "Warehouse fullfilment associate",
+        "reviewPros": "One of the best reasons to work at Amazon is the opportunity for educational advancement. After three months of employment, Amazon will pay for you to pursue higher education. For example, right now they are covering the cost of my Full Stack Software Engineer class. Additionally, Amazon offers competitive pay and a comprehensive benefits package, including health, dental, and vision insurance, as well as retirement plans. You also have full control over your work schedule, providing flexibility to balance work and personal commitments. The fast-paced environment and job stability are other significant advantages, along with opportunities for career growth for those who perform well and are willing to take on additional responsibilities. While the work can be physically demanding, the supportive benefits and opportunities for advancement make it a rewarding experience.",
+        "reviewCons": "The cons include the management in place. Most have subpar social skills, and upper management has no idea what is happening on the floor. They stay behind their desks only looking at the numbers. They say they care about safety, but if you look at the rate we are supposed to work at, you'll see what they care about the most. I really think Amazon should require every new manager to read \"How to Win Friends and Influence People\" and pass a test on it before starting their role. On the corporate side of things, the pay could always be better. In California, the cost of living is so high, and the pay they offer is by no means a job you can retire from, which is why I am taking classes to upgrade my skills and increase my pay. Adding to this, many employees find the work environment to be highly stressful due to strict productivity targets and physically demanding tasks. The work-life balance can be challenging with long hours and mandatory overtime during peak seasons. Despite opportunities for advancement, some employees feel that management does not always support career development. Inconsistent management practices can also lead to a lack of clear communication and support. Additionally, while benefits are comprehensive, the demanding nature of the job often overshadows these positives, leading to a high turnover rate and general dissatisfaction among staff."
+        },
+        {
+        "reviewTitle": "Amazon",
+        "reviewRating": "4.0",
+        "reviewDate": "Jul 31, 2024",
+        "reviewerRole": "Product manager",
+        "reviewPros": "Working at Amazon as a Product Manager has been an incredibly rewarding experience. The innovative environment and customer-obsessed culture have enabled me to drive impactful projects and collaborate with talented teams. The emphasis on data-driven decisions and the autonomy given to PMs to own their products has significantly contributed to my professional growth.",
+        "reviewCons": "While working at Amazon as a Product Manager, I encountered some challenges. The fast-paced and high-pressure environment can sometimes lead to burnout, and the emphasis on frugality often limits resources for projects. The internal processes can be complex and bureaucratic, making it difficult to navigate and sometimes slowing down innovation. Additionally, the work-life balance can be challenging to maintain due to the demanding workload."
+        },
+        {
+        "reviewTitle": "Innovation and Learning",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Software development engineer (sde)",
+        "reviewPros": "Amazon is at the forefront of technological innovation. Working there allows employees to be part of cutting-edge projects and learn from some of the best minds in the industry.",
+        "reviewCons": "Amazon's corporate culture can be competitive and demanding, with a strong emphasis on metrics and data."
+        },
+        {
+        "reviewTitle": "Good Pay, terrible socially",
+        "reviewRating": "2.0",
+        "reviewDate": "Aug 16, 2024",
+        "reviewerRole": "Technical program manager",
+        "reviewPros": "They pay you well and you are surrounded by many top people in their field",
+        "reviewCons": "There is slim to no social interaction, no support for community, Everyone is for themselves, and every discussion is completely work only. This is a place where if you die while working here you won't be remembered or even mentioned again."
+        },
+        {
+        "reviewTitle": "It's not easy, but it's a prestigious job",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Finance manager",
+        "reviewPros": "Amazon's management is no-nonsense and has developed systems of thought that encourage good decision-making",
+        "reviewCons": "It's org-dependent, but you can't come in expecting to work 40 hours a week. Some will, many will not."
+        },
+        {
+        "reviewTitle": "Loving it",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Warehouse worker",
+        "reviewPros": "Good wages, lots of work, time flies by",
+        "reviewCons": "Hours are long, some people don't like to work as hard as me."
+        },
+        {
+        "reviewTitle": "Salary at Amazon sort center",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 22, 2024",
+        "reviewerRole": "Sortation associate",
+        "reviewPros": "Good job if your at a sort center, nice pay.",
+        "reviewCons": "Sometimes it’s hard and overwhelming."
+        },
+        {
+        "reviewTitle": "Slave corps",
+        "reviewRating": "2.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Warehouse associate",
+        "reviewPros": "Benefits and pay for what you're doing",
+        "reviewCons": "The shift hours vary and can change at the drop of a hat. They will tell you one thing, and then it will be the opposite. The managers depending can be unbearable to work with and generally suck."
+        },
+        {
+        "reviewTitle": "A good, if chaotic, place to work",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Sr. economist",
+        "reviewPros": "Compensation is fair and reasonable",
+        "reviewCons": "There is a lot of churn with managers changing teams a lot"
+        },
+        {
+        "reviewTitle": "Time with Amazon",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Process associate",
+        "reviewPros": "Great environment Works with your school",
+        "reviewCons": "The hours during the night also have to work with parents more"
+        },
+        {
+        "reviewTitle": "not sustainable",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 18, 2024",
+        "reviewerRole": "Delivery driver",
+        "reviewPros": "Lots of alone time Good exercise",
+        "reviewCons": "It’s almost impossible to deliver as much as they want you to within the allotted time. My co-worker called it a sweat shop. Turnover is super high."
+        },
+        {
+        "reviewTitle": "Amazon associate",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 13, 2024",
+        "reviewerRole": "Associate",
+        "reviewPros": "The pay is decent and the benefits start on day one.",
+        "reviewCons": "It is physically demanding, mostly moving large carts and pallets. Your loading and unloading tractor trailers for most of the day. Sortation centers only offer part time positions at an associate level."
+        },
+        {
+        "reviewTitle": "It's a job",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Aa(amazon associate)",
+        "reviewPros": "Good pay Steady hours and opportunities for overtime Great benefits",
+        "reviewCons": "Workload can be excessive at times for associates"
+        },
+        {
+        "reviewTitle": "FBA Sales becoming difficult at Amazon",
+        "reviewRating": "3.0",
+        "reviewDate": "Jul 3, 2024",
+        "reviewerRole": "Fba seller",
+        "reviewPros": "Work remotely. If you put in the work you can figure out how the market demand is and make good money once you have found your niche.",
+        "reviewCons": "Amazon is squeezing out small businesses selling FBA. They have retroactively introduced copyright restrictions on items that were not there before and will not let you simply delete the listing it just goes on your account health score. I have lost my account based on items I sold 5 years ago when I had clearance to and no longer have had in stock for that long. Amazon was s also Falmouth for taking my any well selling item by a small company and then stealing the idea and undercutting the seller by using it on Amazon Basics. This puts a lot of people out of business."
+        },
+        {
+        "reviewTitle": "Love the job",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 3, 2024",
+        "reviewerRole": "Outbound order picker",
+        "reviewPros": "Pay compensation is pretty decent. You are give lots of UPT/PTO/Vactation hours and they really try and give you every opportunity to get you to stay within reason as long as you fully understand what you cannot hit zero UPT you’re good. You get to learn new thing all the time and different departments. Driving and learning all the different types of forklifts and equipment is fun . The people are generally all nice",
+        "reviewCons": "The jobs are physical but not overwhelming . Are sometimes expected to work a mandatory extra day or hours but good overtime pay for it."
+        },
+        {
+        "reviewTitle": "Really tough, but good",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 14, 2024",
+        "reviewerRole": "Area manager ii",
+        "reviewPros": "Good investment in employees Fast pace Good pay",
+        "reviewCons": "You will have no life for roughly a 1/4 of the year depending on how MET goes. 6 days a week, and it may be nights. Days are long usually 12 hours, but often longer. You will never be told you have to stay, but you'll feel the pressure to do the those 16 hour days"
+        },
+        {
+        "reviewTitle": "L3",
+        "reviewRating": "2.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Learning trainer",
+        "reviewPros": "Benefits are great, and work schedules are reasonalve",
+        "reviewCons": "inconsistent leadership, development opportunities are close to non existent."
+        },
+        {
+        "reviewTitle": "Money is good, the rest is not",
+        "reviewRating": "2.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Senior technical account manager",
+        "reviewPros": "high pay and interesting work, mostly",
+        "reviewCons": "a lot of back channeling and poor spirited competition"
+        },
+        {
+        "reviewTitle": "Building Review",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 9, 2024",
+        "reviewerRole": "Trainer",
+        "reviewPros": "Close to home. Opportunity to grow",
+        "reviewCons": "Where do I start...The building is 3 years old, but looks like it is 30 years old on the inside. Upper management doesn't care about the little people, only want to make themselves look good. If you don't speak Spanish, you won't promote in some departments. This building is a disgrace and gives Amazon a bad name!!"
+        },
+        {
+        "reviewTitle": "Not bad",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Senior software engineer",
+        "reviewPros": "Pay is not as bad as most people say",
+        "reviewCons": "Long work hours, boring work"
+        },
+        {
+        "reviewTitle": "Best job I've had but senior management (L8+) obfuscates the truth",
+        "reviewRating": "4.0",
+        "reviewDate": "Jun 10, 2024",
+        "reviewerRole": "Senior technical program manager",
+        "reviewPros": "Co-workers were very good at their job making problem solving easier. I was encouraged NOT to work crazy hours/weekends. My boss was very understanding and protected us from C suite politics. Most co-workers were easy to work with, responsive, and open to new ideas. It was easy for me to provide constructive feedback without triggering any conflict. Overall the team was motivated and great to work with. Pay wasn't bad at all. Please note I worked at Amazon Music, not the more \"traditional\" Amazon org's such as AWS.",
+        "reviewCons": "Our product was eventually shutdown due to lack of customer use. The way the company handled the layoffs was lack luster and filled with \"smoke and mirrors\". Leading up to layoffs, senior leadership played coy and pretended they didn't know what was happening. To their credit, this was likely legally driven from Amazon Corporate."
+        },
+        {
+        "reviewTitle": "Process Assistant",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Tier iii process assistant",
+        "reviewPros": "Great health benefits and time off policy. They pay for college as well.",
+        "reviewCons": "Inconsistent expectations from constant manager changes and brand new managers from college as first job."
+        },
+        {
+        "reviewTitle": "Good pay but not worth it",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Warehouse associate",
+        "reviewPros": "A lot of hours to work",
+        "reviewCons": "Everything is computer based which is annoying"
+        },
+        {
+        "reviewTitle": "NOT TOO BAD",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Senior pm",
+        "reviewPros": "You always have a banana every day, oh , and a free coffee.",
+        "reviewCons": "You need to be very competitive to survive"
+        },
+        {
+        "reviewTitle": "Fair",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Associate",
+        "reviewPros": "Flexibility as Flex status; able to pick up shifts on a daily basis.",
+        "reviewCons": "Limited amount of shifts during holidays due to increase in staff."
+        },
+        {
+        "reviewTitle": "Working Conditions",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 3, 2024",
+        "reviewerRole": "Learning ambassador",
+        "reviewPros": "- you can work on your own pace. - you will have 5 min breaks whenever you want to refresh yourself",
+        "reviewCons": "- you will be asked to do lot of things if you are wearing a vest(learning ambassadors) - some managers might pick you again and again if you do a good job which gets little annoying that out of 300 people one person gets asked to do stuff again and again."
+        },
+        {
+        "reviewTitle": "amazon",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 18, 2024",
+        "reviewerRole": "Associate",
+        "reviewPros": "Amazon has a very flexible work schedule as well as being very convenient as its close to home",
+        "reviewCons": "overworks their hard working employees and keep those who dont do work"
+        },
+        {
+        "reviewTitle": "Cut Stock",
+        "reviewRating": "2.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Lead on road execution",
+        "reviewPros": "DOT Experience needed for this role",
+        "reviewCons": "Amazon eliminated the role in 2024 and demoted all employees at this level and removed stock based comp for the position"
+        },
+        {
+        "reviewTitle": "It’s a paycheck but pray you never deal with HR",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 13, 2024",
+        "reviewerRole": "Customer service representative",
+        "reviewPros": "You control your paid and unpaid time off (unless it’s all hands on deck).",
+        "reviewCons": "The HR department are handled by over seas randomized people who cannot personalize anything. They only have scripted responses and one doesn’t know what the other says or does."
+        },
+        {
+        "reviewTitle": "You get back what you put in",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 17, 2024",
+        "reviewerRole": "Transportation associate",
+        "reviewPros": "Amazon is great company to work at. They have lots of resources for employees and it is possible to continually move up.",
+        "reviewCons": "It takes a long time to be promoted, Corporate safety policies on everything. More lazy coworkers than hard working ones."
+        },
+        {
+        "reviewTitle": "good culture",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Merchandising specialist",
+        "reviewPros": "great culture, good people, anyone interested in entertainment can enjoy people's company. autonomy",
+        "reviewCons": "lack of structure, day 1 mentality where everything is changing a lot,"
+        },
+        {
+        "reviewTitle": "Good",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Wearhouse worker",
+        "reviewPros": "Good place to work great bennifits.",
+        "reviewCons": "None for me. I loved working there left to be a full time home maker"
+        },
+        {
+        "reviewTitle": "Only as good as you're willing to make it",
+        "reviewRating": "3.0",
+        "reviewDate": "Jul 16, 2024",
+        "reviewerRole": "Area manager",
+        "reviewPros": "Pay and Stock options. There's not another company that pays as well as Amazon for this job level",
+        "reviewCons": "You will be working extensively for the pay you're making. Overnight hours, long days, unpaid overtime, and you will not progress unless you have an insane self motivation to promote yourself or have upper leaders that genuinely try to help you excel. If your upper management is indifferent, you'll be stuck if you don't actively try to promo yourself. Be willing to move often. Very military-esque in the way that you have the opportunity to move across the country in as often as a yearly basis"
+        },
+        {
+        "reviewTitle": "Requires no skills except high school diploma with opportunities for high level",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 6, 2024",
+        "reviewerRole": "Aa(amazon associate)",
+        "reviewPros": "Pays more than the local labor market starting at $15.50 Step plan for regular raises over 3 years & annual cost of living adjustment Benefits galore including tuition assistance to upskill",
+        "reviewCons": "Tier I warehouse associate positions are physically demanding Inconsistent between facilities and supervisors about enforcing rules and what merits disciplinary action"
+        },
+        {
+        "reviewTitle": "Not what was expected",
+        "reviewRating": "2.0",
+        "reviewDate": "Jul 22, 2024",
+        "reviewerRole": "Delivery driver",
+        "reviewPros": "work later in the day, shift was 12-10pm",
+        "reviewCons": "All safety checks on vehicles are to be checked off regardless of issue, camera in vehicle beeping and recording you the entire time. Phones are used for directions but looking at the directions is a violation. No time for bathroom and if you finish your route quickly you have to meet up with a slow driver and take half their load."
+        },
+        {
+        "reviewTitle": "Delivery Station Liaison",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Cs resolution specialist",
+        "reviewPros": "Flexible Schedule, Pay Tuition, Holiday Pay, Health benefits",
+        "reviewCons": "Repetitive Job. hard to grow under same customer service area"
+        },
+        {
+        "reviewTitle": "The W Stands for What",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 1, 2024",
+        "reviewerRole": "Site whs manager",
+        "reviewPros": "The company has great health insurance. If you have no degree or experience, you can still move up the ladder and into any department. Your safety team will get to hand out Squincher pops to thousands of workers, putting smiles on everyone's faces.",
+        "reviewCons": "Constant schedule changes. Very high turnover rates. Work is VERY easy, but long and meaningless."
+        },
+        {
+        "reviewTitle": "Amazon sde",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Software engineer",
+        "reviewPros": "Amazon gives me an opportunity to transfer my career from finance to SDE",
+        "reviewCons": "Bad WLB, culture and pip quota"
+        },
+        {
+        "reviewTitle": "Great job",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Warehouse associate",
+        "reviewPros": "Needs eight hour shifts. And Monday through Friday shifts",
+        "reviewCons": "Can work up to 60 hours a week"
+        },
+        {
+        "reviewTitle": "Easygoing job with busy moments.",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 1, 2024",
+        "reviewerRole": "Retail store associate 1, l1",
+        "reviewPros": "Easy work. Very simple and straightforward job. One of the best positions you can have in the entry level Amazon ecosystem. Very flexible as well. You can pick your own schedule.",
+        "reviewCons": "Availability of shifts is a common concern. Don't expect to work more than 13 hours per week, depending on your work location. Everyone is competing for shifts as there are no fixed shifts available."
+        },
+        {
+        "reviewTitle": "Amazon picker/packer pay",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Picker/packer",
+        "reviewPros": "Health, dental, benefits Early pay options Good atmosphere Pay",
+        "reviewCons": "Standing full shift Very physical Heavy crates Short breaks Long walk time to restroom, break rooms, outside"
+        },
+        {
+        "reviewTitle": "Easy Job",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Stocker",
+        "reviewPros": "provides scholarship for school and college",
+        "reviewCons": "Cannot sit and have to work all the time"
+        },
+        {
+        "reviewTitle": "Hope this helps",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Marketing executive",
+        "reviewPros": "Most talented team that I've ever worked with",
+        "reviewCons": "Nothing negative, other than long hours"
+        },
+        {
+        "reviewTitle": "RTO Disaster",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Sr mgr supply chain",
+        "reviewPros": "Gave 1 year for RTO compliance",
+        "reviewCons": "Virtual employees pre 2020 not kept virtual after RTO guidnace"
+        },
+        {
+        "reviewTitle": "Worst place to work for",
+        "reviewRating": "1.0",
+        "reviewDate": "Jul 11, 2024",
+        "reviewerRole": "Software development engineer (sde)",
+        "reviewPros": "- good pay obviously - MAANG addition in your resume",
+        "reviewCons": "- You are competing against your own team members . At the end of the year, you are compared with all team members and if you are at the bottom of the queue. Congratulations, you will be PIPed and eventually let go. - They say it's okay make mistakes, but your mistakes are being recorded. - Inexperienced managers - promoted directly from SDE 1 to Manager for the team that they know nothing about. - you can never have a slow day/week where you did not give 100% , you always have to be above and beyond (day in day out) which is inhumane. - needless to say no work life balance"
+        },
+        {
+        "reviewTitle": "Great training",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 14, 2024",
+        "reviewerRole": "Human resources business partner hrbp",
+        "reviewPros": "Great opportunity to learn under pressure Will get great exposure to complex problems You're giving the chance to try new things",
+        "reviewCons": "With the constant reporting and meetings it can take you away from other important aspects of your job. There's a high focus on data, which takes away from the meaningful people interactions."
+        },
+        {
+        "reviewTitle": "Friendly managers but increased pain after 1st year doesn't really go away",
+        "reviewRating": "2.0",
+        "reviewDate": "May 18, 2024",
+        "reviewerRole": "Fc associate i",
+        "reviewPros": "An opportunity for full-time work when you don't have any others. There a lot of training and edu options, at least for full-time. Insurance, etc is okay, but \"full-time\" is not the same as being scheduled for 40 hours minimum every week for 8 months if you are still officially \"seasonal\".",
+        "reviewCons": "You will prematurely wear out all your joints doing something like pick full time. Then, the very nice managers will recommend you get an accommodation so you can work in flats, or something. When you call the corporate Amazon person to get that started they will say to try for worker's comp first, because that's always worth doing. But workers' comp is for things like breaking a bone, or at least my joints are 100%, everyone has joint pain, I'm a big baby, etc, it's just that all of mine started after my first peak season. Anyway, I found the worker's comp/accommodation process kinda humiliating and I felt like a bad person for trying to attempt it. Basically, I'm a big baby, waa waa, who is totally okay with moving back in with my parents instead of pretending to be a robot."
+        },
+        {
+        "reviewTitle": "It’s ok, not somewhere I would stay long term.",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 16, 2024",
+        "reviewerRole": "Sortation associate",
+        "reviewPros": "Decent pay. Can help with college. Easy to get time off. Flexible hours (but not always) Decent part time job for students",
+        "reviewCons": "Absurd policies Rude/weird coworkers Can be physically straining HR is horrible. It can be insanely boring. Don’t recommend working full time"
+        },
+        {
+        "reviewTitle": "overall good, but team is important",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Data engineer",
+        "reviewPros": "Good learning for new grad",
+        "reviewCons": "no much benefits, also finding the right team is critical, many toxic teams out there"
+        },
+        {
+        "reviewTitle": "Good for a starting job",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Warehouse associate",
+        "reviewPros": "You get UPT and PTO as a part-time associate.",
+        "reviewCons": "Very hard on the body."
+        },
+        {
+        "reviewTitle": "Amazon",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Stower",
+        "reviewPros": "Flexible schedule three days off pto",
+        "reviewCons": "Written up if you have to go to bathroom stricked"
+        },
+        {
+        "reviewTitle": "Amazon outbound air",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 14, 2024",
+        "reviewerRole": "Aa(amazon associate)",
+        "reviewPros": "The benefits are great as well as the career choice program.",
+        "reviewCons": "Full of unmotivated people, and problems don't get solved because of upper management failing to evaluate the floor."
+        },
+        {
+        "reviewTitle": "It pays the bills",
+        "reviewRating": "4.0",
+        "reviewDate": "Jun 18, 2024",
+        "reviewerRole": "Fulfillment associate",
+        "reviewPros": "You get 40 hours, and a lot of overtime. Work is slower after Christmas and New Year's, but picks up as Spring and Summer rolls in. 90 days and you get access to career choice program. I highly recommend anyone that doesn't see Amazon as more as a stepping stone to take full advantage of it. They are generous with time-off. So long as you don't use up all of your UPT, you can technically leave when you need to, even during the holiday season.",
+        "reviewCons": "Management makes it or breaks your time. If they know what they are doing, then work runs smoothly. If they don't, then things fall apart left, right and center. Promotions are hard to get, especially when you do not get support from management. You are limited to applying to 4 jobs. Most of the time, they don't even tell you if you've been rejected."
+        },
+        {
+        "reviewTitle": "Working at Amazon",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 17, 2024",
+        "reviewerRole": "Fc associate tier i",
+        "reviewPros": "4 days a week, inside, climate control",
+        "reviewCons": "Expensive food offerings, long days, no real value to the work. No room for advancement"
+        },
+        {
+        "reviewTitle": "It’s a labor job",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Associate",
+        "reviewPros": "Plenty of hours, paid on time.",
+        "reviewCons": "Sometimes the work is tiring but not much different than any other labor job."
+        },
+        {
+        "reviewTitle": "Nice to work at",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Program manager",
+        "reviewPros": "Lots of opportunities to grow",
+        "reviewCons": "Less benefits than competitors Work-Life balance is wrecked"
+        },
+        {
+        "reviewTitle": "Heavy manual processes",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 7, 2024",
+        "reviewerRole": "Internal audit",
+        "reviewPros": "Pay is good for the industry. Only 3 days a week in the office.",
+        "reviewCons": "Terrible internal technology which drives a lot of administrative manual processes. For a tech company, the internal tools are straight out of the 90s. Decision making on investments tends to lead to building applications from within, which takes a long time and not worth the wait. The amount of money wasted on building non-customer facing tech is staggering and there is zero cost-benefit analysis."
+        },
+        {
+        "reviewTitle": "Good pay for warehouse job",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Fc associate i",
+        "reviewPros": "-pros the people -the pay -the overtime -career opportunities",
+        "reviewCons": "-people -sometimes how the management can be -its really dependent on what they receive"
+        },
+        {
+        "reviewTitle": "Amazon Great Place to Work",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Picker/packer",
+        "reviewPros": "flexibility in hours is nice",
+        "reviewCons": "sometimes not enough hours to go around"
+        },
+        {
+        "reviewTitle": "Not for the long term",
+        "reviewRating": "3.0",
+        "reviewDate": "May 24, 2024",
+        "reviewerRole": "Senior product manager",
+        "reviewPros": "I've met some great people here who want to do good quality work and who want to collaborate. You have to learn fast and hone skills quickly. There's great leadership-level focus on writing skills. The leadership principles are a good framework for decision-making, and the company culture is actually built around them. The LPs are used, not performative.",
+        "reviewCons": "Constant cries of \"do more with less\" from leaders, to the point where I feel taken advantage of. The work is actually really engaging but there is just too much of it all the time. There so much work that I often feel I don't have time to do a quality job. People leave the company, and their work gets absorbed by others instead of leaders backfilling roles, even when backfill is needed. Major downward pressure on career advancement via politics of turn-taking and strict performance review process. Leads to constant judgment of whether people are performing tasks \"appropriately for their level.\" Contributes to people overworking themselves out of fear. Scarcity of time across the organization makes some teams territorial and protective of their minutes."
+        },
+        {
+        "reviewTitle": "Somewhat good",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Soratation associate",
+        "reviewPros": "Good place to work,good pto policy can call out anytime",
+        "reviewCons": "Very back breaking,job can be tiresome"
+        },
+        {
+        "reviewTitle": "Varies from warehouse to warehouse",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Warehouse worker",
+        "reviewPros": "Has a great starting pay",
+        "reviewCons": "Respect varies from warehouse to warehouse"
+        },
+        {
+        "reviewTitle": "great",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Purchasing officer",
+        "reviewPros": "easily the most real job i ever had",
+        "reviewCons": "low levels of information about my job"
+        },
+        {
+        "reviewTitle": "Amazon",
+        "reviewRating": "3.0",
+        "reviewDate": "Jul 31, 2024",
+        "reviewerRole": "Hr partner",
+        "reviewPros": "Growth - Moved up to a salaried employee from a warehouse associate with no degree. Pay - Increases every year, but based on performance among peers. Benefits - 401k, medical, dental, vision, PTO, vacation Stocks - Receive stocks every years. Easy - the job itself is easy. Everyone has captainships such as recruiting, appeals, transfers, etc. so there is always room to learn something new or create your own project to improve your site.",
+        "reviewCons": "Long hours - there was never enough time to finish the work due to short staffed. When we were staffed, you could finish everything with extra time for projects. Over worked - certain team members were placed with high expectations such as competing \"x\" amount of cases, investigations, etc. by a certain time. If you did not meet their expectations, they would let you go. Poor communication - management never knew how to to communicate with their team. Management would ask for feedback, and they would only improve for a week and go back to their old habits. Management would not take accountability for their actions, and point the finger at their team behind their teams back. Poor management - monthly 1:1s with managers were not helpful because managers did not know how to offer feedback. Manager would say that you're not meeting weekly goals without first understanding the difference of the amount of work amongst each shifts. Manager would not know what you accomplish because they do not work on your shift. The team was always the last ones to find out what was going on with the site because the manager did not pass the information over or ensure all shifts of the team were aware. Performance based - you are expected to innovate and come up with projects. It's fun at first until your performance and 1:1s are reviewed by it. You are constantly compared to your peers. Managers do not understand the policies themselves, and hate to admit their wrong. Poor work life balance - schedules change every 6mo, and you are rotated among different shifts. There isn't an accommodation policy for salaried employees so they use that against you. No accommodation for school - they might be able to accommodate at first, but they always go back on their word. You will not be able to work less hours once you are salaried unless you have a medical accommodation, only exception."
+        },
+        {
+        "reviewTitle": "Off the Radar: For Better or For Worse",
+        "reviewRating": "3.0",
+        "reviewDate": "Jul 31, 2024",
+        "reviewerRole": "Control systems technician",
+        "reviewPros": "Leaving the info I wish I had: - Decent job security - You can use your PTO and UPT whenever you want without being punished, UPT especially is very generous - Despite the criticality of the role, you can completely shut yourself off once you clock out - Hourly, so good overtime potential - Good pay, as long as you don't put in too much effort - Depending on your site, can either be stressful (you should transfer) or very laid-back - Lots of opportunities to learn, if only there were meaningful places to go...",
+        "reviewCons": "- While it can be laid-back, you need to be familiar with your specific warehouse to reach that point - Not many opportunities for growth - only one role above unless you switch to management - While pay is good, you'll find other less technical roles skyrocket past you in pay structure. This job's pay structure is a messed up combo of L3 and L4 pay, meaning you get none of the benefits of review-based pay but all of the negatives. - One of these negatives is PIPs - maintenance techs that make more than you cannot be placed on a performance improvement plan (i.e fired for various \"performance based reasons\"), while you can. - You also won't get the raises technicians get... while you see them get $2-$7 dollars every few years, you might see $2 AT MOST in the same time. That's also assuming it isn't your first year (if the performance review is 11.99 months from your start date - no raise, sorry!). That's even if you get the highest performance rating. - Prepare for everyone to push every problem onto you since they don't understand what you do, then get mad when you don't do their job for them In summary for Pros and Cons - Good pay and job security if you don't mind staying in the same underappreciated position forever, just know you'll be overlooked in the giant corporate machine when it comes to your career development. Instead, skip an apprenticeship/schooling and just do their MRA program. You'll get better pay, short and free schooling, free travel, and better job security since that role is respected much more by the company than any other RME role. Either that, or go ahead and do CST->CSL... but be warned, it's probably the highest you'll go at Amazon."
+        },
+        {
+        "reviewTitle": "Amazing place to work",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 14, 2024",
+        "reviewerRole": "Anonymous employee",
+        "reviewPros": "Firstly, Amazon is a globally recognized and respected company that has revolutionized the e-commerce industry. I was drawn to the company's strong values and commitment to customer satisfaction. I believe that working at Amazon will provides me with valuable experience and opportunities for growth.",
+        "reviewCons": "Work Life Balance, Multiple Re-orgs"
+        },
+        {
+        "reviewTitle": "Amazon work",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 13, 2024",
+        "reviewerRole": "Picker/packer",
+        "reviewPros": "It was a great environment to work in and very helpful staff",
+        "reviewCons": "They were big on the repercussions of being late after your break even if you had to walk a lot to your position it would make a 15 min break turn into 8 by the time you walked to and from the break room"
+        },
+        {
+        "reviewTitle": "Amazon Fufilment, are the Associates actually fufilled?",
+        "reviewRating": "3.0",
+        "reviewDate": "Mar 18, 2024",
+        "reviewerRole": "Tier iii amazon process assistant",
+        "reviewPros": "If you are in school and need a good part time job and dont feel like talking to customers then amazon is good for the time being. You will be in an air conditioned facility! If you are a blue badge full time, they will help pay for schooling. Plenty of resources that i've never seen offered at a Job before.",
+        "reviewCons": "On the flip side if you are looking into making a career out of Amazon and moving up that can happen! However, after you become a tier 4, your work life balance will be stripped from you depending on what your shift is. Terrible hours, working 13 hours a day 3-4 times a week. 5AM-6PM or 5PM-6AM are the currently shift times if you would like to become a manager. It did not used to be like this, so I have given up on my goal to become a manager because the currently schedule is not great in my opinion. This will causes Managers to quit and not be able to talk to all amazonians which leads to connection scores going down along with morale for team. The pay is average, I think amazon should pay Tier 1 AAs more. Tier 3's should be paid more, and Managers should be paid more. I expected more from a company this huge but in reality the money is not equally distributed across the positions for what we are doing. Certain positions should be paid more for what they require you to know. Yet Amazon loves to generalize everything."
+        },
+        {
+        "reviewTitle": "Good salary",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Site whs manager",
+        "reviewPros": "Easy work, good schedule, good benefits",
+        "reviewCons": "A lot of entitlement in associates, HR and Management do not have your back"
+        },
+        {
+        "reviewTitle": "AMazon Culture",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Sr. sdm",
+        "reviewPros": "Opportunity to learn new things",
+        "reviewCons": "nested reporting structure is a concern"
+        },
+        {
+        "reviewTitle": "Good starter job",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Associate",
+        "reviewPros": "Flexible job, easy to move up",
+        "reviewCons": "A lot of time people go home early (VTO) leaving a lot of work on the few that stay."
+        },
+        {
+        "reviewTitle": "Truly worst company out there",
+        "reviewRating": "1.0",
+        "reviewDate": "Jul 1, 2024",
+        "reviewerRole": "Warehouse manager",
+        "reviewPros": "They're always hiring... and the hiring process is fast",
+        "reviewCons": "The company painfully repeats corporate phrases like \"Safety is our top priority\" but does absolutely nothing to back it up. Everything they attempt to push through comes off as \"for legal reasons\" and has no real tangible impact. The culture is to not care and get the job done. \"it\" rolls down hill and someone will take care of it. Look at any known issue that Amazon has had and think about how long it's been a known issue. I have seen the exact same flaws, errors, and issues with last mile between the stations and the drivers for years. Known issues are simply neglected issues with this company and the entire process seems like an ongoing Beta version of what it could be. Imagine the money saved by stations AND DSP owners by simply fixing minor Flex app issues that have plagued drivers for years. Investing millions in automation but still having the same issues with properly loading routes. It's truly mind blowing how disassociated the company is with the actual process that makes them a company."
+        },
+        {
+        "reviewTitle": "Amazon",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Area manager ii",
+        "reviewPros": "Opportunity for advancement is good",
+        "reviewCons": "Workload can be quite stressful"
+        },
+        {
+        "reviewTitle": "Truck Driver",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Truck driver",
+        "reviewPros": "you drive all day and they pay for gas",
+        "reviewCons": "you drive all day and have to be ontime"
+        },
+        {
+        "reviewTitle": "Fast pace work culture",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Software developer engineer",
+        "reviewPros": "A lot of learning opportunities",
+        "reviewCons": "Job security is not great."
+        },
+        {
+        "reviewTitle": "Operations",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Loss prevention",
+        "reviewPros": "Benefits. Great coworkers. PTO. Time off options",
+        "reviewCons": "Work life balance. Long hours"
+        },
+        {
+        "reviewTitle": "Great Team & Learning Experience",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 10, 2024",
+        "reviewerRole": "Executive recruiting coordinator",
+        "reviewPros": "The benefits and overall experience of working for a big tech company is a great opportunity - you're exposed to so many stakeholders as well",
+        "reviewCons": "It can be a little bit difficult to climb the ladder - you have to go through the interview process all over again but if you have the patience it is definitely worth it"
+        },
+        {
+        "reviewTitle": "Pretty good",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 14, 2024",
+        "reviewerRole": "Fullfillment associate",
+        "reviewPros": "Managers were nice, easy job",
+        "reviewCons": "They forget to train people for months, they punish you for clocking out too late or leaving early to get down stairs in time (it's a 10 minute walk to the front)."
+        },
+        {
+        "reviewTitle": "Warehouse Associate.",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "General warehouse associate",
+        "reviewPros": "The company offers competitive compensation, comprehensive benefits, and a supportive work environment with friendly and professional colleagues.",
+        "reviewCons": "Extended working hours, Insufficient work-life balance, Ineffective human resources management."
+        },
+        {
+        "reviewTitle": "Fast paced",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Delivery driver",
+        "reviewPros": "Get to do things on your own",
+        "reviewCons": "Can get an impossible amount of packages some days"
+        },
+        {
+        "reviewTitle": "good job for teens",
+        "reviewRating": "2.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Warehouse associate",
+        "reviewPros": "if your looking for flexibility...",
+        "reviewCons": "managment only things about numbers"
+        },
+        {
+        "reviewTitle": "Good environment",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Picker/packer",
+        "reviewPros": "Got to pick my shift",
+        "reviewCons": "No headphones allowed when working"
+        },
+        {
+        "reviewTitle": "Good to barely get by",
+        "reviewRating": "1.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Csa - customer service associate",
+        "reviewPros": "Remote work and flexible hours",
+        "reviewCons": "No chance for any advancement. You stay where you come in at and there are no raises."
+        },
+        {
+        "reviewTitle": "Picker",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Fulfillment associate",
+        "reviewPros": "The pay was good and awesome.",
+        "reviewCons": "They treat you like robots. Favoritism exists."
+        },
+        {
+        "reviewTitle": "former employee",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Driver",
+        "reviewPros": "coworkers location hours benefits vto",
+        "reviewCons": "chain of command unorganized demanding"
+        },
+        {
+        "reviewTitle": "Decent",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Warehouse associate",
+        "reviewPros": "The co workers are alright",
+        "reviewCons": "Managers have favoritism towards friends"
+        },
+        {
+        "reviewTitle": "Good job",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Warehouse worker",
+        "reviewPros": "Good job weekly pay great people good environment",
+        "reviewCons": "Flexing up is the worse thing about the job"
+        },
+        {
+        "reviewTitle": "It's okay for newbie workers or older people",
+        "reviewRating": "3.0",
+        "reviewDate": "Jul 14, 2024",
+        "reviewerRole": "Warehouse associate",
+        "reviewPros": "It's a very simple job People are generally friendly and supportive Pretty lax on attendance Even if you don't hit rate, you'll generally be left alone if you're doing your job Pretty easy to get in as permanent employee",
+        "reviewCons": "Work is repetitive Constant standing and walking on hard concrete Not really much time to talk and get to know your coworkers cause you'll be too busy scanning 15 min breaks go by in an instant The pallets being build generally end up being horrendous and need to be rebuilt"
+        },
+        {
+        "reviewTitle": "N/a",
+        "reviewRating": "2.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Driver",
+        "reviewPros": "Great exercise and morning shift",
+        "reviewCons": "They pay wasn’t enough for me"
+        },
+        {
+        "reviewTitle": "It's fine",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 11, 2024",
+        "reviewerRole": "Software engineer ii sde2",
+        "reviewPros": "Fun to mess with AWS for free and without any major risks",
+        "reviewCons": "Your direct manager makes or breaks your experience here. I was on a team with an awesome manager, it was great, we have recently regorged and its not as great (could be growing pains)."
+        },
+        {
+        "reviewTitle": "Great for keeping the weight off!",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 18, 2024",
+        "reviewerRole": "Driver",
+        "reviewPros": "Great job f you can keep up",
+        "reviewCons": "Bad if you can't keep up and they only give you a month if that to meet performance."
+        },
+        {
+        "reviewTitle": "Great place to learn",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Software development engineer",
+        "reviewPros": "- Good place to learn and grow. - Fast learning.",
+        "reviewCons": "- Too much pressure - No proper direction from the management."
+        },
+        {
+        "reviewTitle": "Leadership Principle",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Anonymous employee",
+        "reviewPros": "Good pay and growth opportunities, work with talented people",
+        "reviewCons": "Poor employee benefits, frugality to extreme"
+        },
+        {
+        "reviewTitle": "not great experience",
+        "reviewRating": "1.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Associate",
+        "reviewPros": "part timers get a small credit/discount",
+        "reviewCons": "your reward for finishing your work quickly was to complete the jobs that coworkers did not finish"
+        },
+        {
+        "reviewTitle": "BEWARE",
+        "reviewRating": "2.0",
+        "reviewDate": "Aug 7, 2024",
+        "reviewerRole": "Delivery driver",
+        "reviewPros": "Freedom of doing your route",
+        "reviewCons": "DSP owners Full time not 40 hours No overtime"
+        },
+        {
+        "reviewTitle": "Good part time work",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 13, 2024",
+        "reviewerRole": "Warehouse associate",
+        "reviewPros": "Can select a schedule. Can use paid time off and unpaid time off. to work around for family or other needs. Also can pick up extra shifts if available.",
+        "reviewCons": "Not everyone you work with does their share of work."
+        },
+        {
+        "reviewTitle": "Normal",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Software development engineer (sde)",
+        "reviewPros": "Easy assessments - 2 coding questions, and easy behaviour round",
+        "reviewCons": "Currently working, Heavy work load"
+        },
+        {
+        "reviewTitle": "That'll Do Pig",
+        "reviewRating": "3.0",
+        "reviewDate": "Jul 18, 2024",
+        "reviewerRole": "Associate",
+        "reviewPros": "Easy, laid back environment. Steady hours, often with ample opportunities for overtime. Good benefits. If you're looking for an easy job to land that pays some what well, it'll do. Not going to be your dream job, but will keep the roof over your head and food in your belly.",
+        "reviewCons": "receptive and sometimes isolating depending on your facilty type. AR/TSSL are places where you can be more social and have the opportunity to move around and be more active. Relo locations, like my current one, you are expected to stay at your stations all day and more or less keep to yourself"
+        },
+        {
+        "reviewTitle": "Sr. HRBP Pay at Amazon",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Human resources business partner hrbp",
+        "reviewPros": "Amazon provides good benefits for her employees",
+        "reviewCons": "Work-Life balance is a big challenge, especially during peak season"
+        },
+        {
+        "reviewTitle": "Just another cog in the machine",
+        "reviewRating": "1.0",
+        "reviewDate": "Aug 21, 2024",
+        "reviewerRole": "Delivery driver",
+        "reviewPros": "The work itself isn’t too bad. Mostly self reliant.",
+        "reviewCons": "Management is usually incompetent. Do not care for your safety."
+        },
+        {
+        "reviewTitle": "One of the Best Experience's I've had",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 5, 2024",
+        "reviewerRole": "Area manager intern",
+        "reviewPros": "-Builds Strong Skills -Amazing Pay -Amazing Relocation Benefits -Amazing opportunities -Not in office 24/7, get a real experience on the floor as an AM Intern. -Only work 4 day weeks",
+        "reviewCons": "- It can be very competitive and communication between departments or shifts can be lacking. -There can be a lot of confusion, if things are discussed properly and things aren't told on time. -Not a lot of time to do things outside of work on days of shift."
+        },
+        {
+        "reviewTitle": "Great",
+        "reviewRating": "5.0",
+        "reviewDate": "Aug 16, 2024",
+        "reviewerRole": "Warehouse associate",
+        "reviewPros": "Great benefits and work schedule.",
+        "reviewCons": "A little difficult to get promoted."
+        },
+        {
+        "reviewTitle": "You get what they pay you",
+        "reviewRating": "3.0",
+        "reviewDate": "Aug 19, 2024",
+        "reviewerRole": "Project manager",
+        "reviewPros": "Lots of room for development",
+        "reviewCons": "They’re getting stingy with benefjts"
+        },
+        {
+        "reviewTitle": "Slavery",
+        "reviewRating": "2.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Anonymous employee",
+        "reviewPros": "Fast Pay after each shift",
+        "reviewCons": "Long Shifts Little breaks No sitting Lots of favoritism Very Slave like environment"
+        },
+        {
+        "reviewTitle": "Its okay",
+        "reviewRating": "4.0",
+        "reviewDate": "Aug 20, 2024",
+        "reviewerRole": "Package handler",
+        "reviewPros": "Its okay as a first job",
+        "reviewCons": "Too mundane to keep as a career"
+        }
+    ]
+}

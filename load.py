@@ -12,7 +12,7 @@ pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
 
 # Create a Pinecone index
 pc.create_index(
-    name="rag",
+    name="rag1",
     dimension=1536,
     metric="cosine",
     spec=ServerlessSpec(cloud="aws", region="us-east-1"),
