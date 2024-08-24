@@ -11,7 +11,7 @@ export default function landingPage() {
         src="/img/fireside_logo.png" // Replace with your image path
         alt="Logo"
         width={300} // Set your desired width
-        height={300} // Set your desired height
+        height={300}
         style={styles.image}
       />
       <div style={styles.textBox}>
@@ -19,7 +19,7 @@ export default function landingPage() {
             FiresideAI's rate my professor app with AI integration, built with OpenAI, Llama 3.1, Pinecone, Next.js, Shadcn UI, RAG, and more.
         </p>
       </div>
-      <Button>
+      <Button style={{ backgroundColor: "#FCD19C", color: 'black' }}>
         <Link href="/chatbot">Open</Link>
       </Button>
     </div>
@@ -33,8 +33,9 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '90vh',
+    height: '100vh',
     textAlign: 'center',
+    backgroundColor: '#1A1A1A'
   },
   image: {
     marginBottom: '20px',

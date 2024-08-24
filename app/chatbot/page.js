@@ -1,5 +1,8 @@
 'use client'
-import { Box, Button, Stack, TextField } from '@mui/material'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
+import { Box, Stack } from '@mui/material'
 import { useState } from 'react'
 
 export default function Home() {
@@ -81,12 +84,12 @@ export default function Home() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      backgroundColor="#1A1A1A"
     >
       <Stack
         direction={'column'}
         width="500px"
         height="700px"
-        border="1px solid black"
         p={2}
         spacing={3}
       >
@@ -108,10 +111,10 @@ export default function Home() {
               <Box
                 bgcolor={
                   message.role === 'assistant'
-                    ? '#2E2E2E'
-                    : '#FF4433'
+                    ? '#FFFFFF'
+                    : '#FCD19C'
                 }
-                color="white"
+                color="black"
                 borderRadius={16}
                 p={3}
               >
@@ -121,14 +124,14 @@ export default function Home() {
           ))}
         </Stack>
         <Stack direction={'row'} spacing={2}>
-          <TextField
+          <Textarea
             label="Message"
             fullWidth
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            helperText="Try: 'Find a professor for subject: [Math], rating: [4]'"
+            placeholder="Try: 'Find a professor for subject: [Math], rating: [4]'"
           />
-          <Button style={{ backgroundColor: "#FF4433" }} variant="contained" onClick={sendMessage}>
+          <Button style={{ backgroundColor: "#FCD19C", color: 'black', height: '80px' }} variant="contained" onClick={sendMessage}>
             Send
           </Button>
         </Stack>
