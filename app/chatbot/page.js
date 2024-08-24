@@ -1,7 +1,8 @@
-'use client'
-import { Box, Button, Stack, TextField, Typography } from '@mui/material'
-import { useState } from 'react'
-import FilterComponent from '../components/FilterComponent'
+'use client';
+
+import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import FilterComponent from '../components/FilterComponent';
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -9,19 +10,18 @@ export default function Home() {
       role: 'assistant',
       content: `Hi! I'm the Rate My Professor support assistant. How can I help you today?`,
     },
-  ])
-  const [message, setMessage] = useState('')
-  const [filters, setFilters] = useState({ role: '', minRating: '' })
-  const [searchCompany, setSearchCompany] = useState('')
+  ]);
+  const [message, setMessage] = useState('');
+  const [filters, setFilters] = useState({ role: '', minRating: '' });
+  const [searchCompany, setSearchCompany] = useState('');
 
   // Function to handle sending company name for scraping
   const handleSearchCompany = async () => {
     if (!searchCompany) {
-      alert('Please enter a company name')
-      return
+      alert('Please enter a company name');
+      return;
     }
 
-    // Send the company name to your backend
     try {
       const response = await fetch('/api/search-company', {
         method: 'POST',
@@ -29,71 +29,72 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ companyName: searchCompany }),
-      })
+      });
 
-      const data = await response.json()
+      const data = await response.json();
       
-      // This is for debugging. Remove this after successful test
-
       if (response.ok) {
         setMessages((messages) => [
           ...messages,
           { role: 'user', content: `Searching for reviews of ${searchCompany}` },
           { role: 'assistant', content: 'Scraping data...' },
-        ])
-        setSearchCompany('')
+        ]);
+        setSearchCompany('');
       } else {
         setMessages((messages) => [
           ...messages,
           { role: 'assistant', content: `Error: ${data.error}` },
-        ])
+        ]);
       }
     } catch (error) {
       setMessages((messages) => [
         ...messages,
         { role: 'assistant', content: `Error: ${error.message}` },
-      ])
+      ]);
     }
-  }
+  };
 
   const sendMessage = async () => {
-    const criteria = { ...filters }
+    const criteria = { ...filters };
     
     setMessages((messages) => [
       ...messages,
       { role: 'user', content: message },
       { role: 'assistant', content: '' },
-    ])
+    ]);
     
-    setMessage('')
-    const response = fetch('/api/chat', {
+    setMessage('');
+    const response = await fetch('/api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify([...messages, { role: 'user', content: message, criteria }]),
-    }).then(async (res) => {
-      const reader = res.body.getReader()
-      const decoder = new TextDecoder()
-      let result = ''
-  
-      return reader.read().then(function processText({ done, value }) {
-        if (done) {
-          return result
-        }
-        const text = decoder.decode(value || new Uint8Array(), { stream: true })
-        setMessages((messages) => {
-          let lastMessage = messages[messages.length - 1]
-          let otherMessages = messages.slice(0, messages.length - 1)
-          return [
-            ...otherMessages,
-            { ...lastMessage, content: lastMessage.content + text },
-          ]
-        })
-        return reader.read().then(processText)
-      })
-    })
-  }
+    });
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let result = '';
+
+    const processText = async ({ done, value }) => {
+      if (done) {
+        return result;
+      }
+      const text = decoder.decode(value || new Uint8Array(), { stream: true });
+      setMessages((messages) => {
+        let lastMessage = messages[messages.length - 1];
+        let otherMessages = messages.slice(0, messages.length - 1);
+        return [
+          ...otherMessages,
+          { ...lastMessage, content: lastMessage.content + text },
+        ];
+      });
+      result += text;
+      return reader.read().then(processText);
+    };
+
+    await reader.read().then(processText);
+  };
 
   return (
     <Box
@@ -190,5 +191,5 @@ export default function Home() {
         </Stack>
       </Stack>
     </Box>
-  )
+  );
 }
