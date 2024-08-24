@@ -169,7 +169,7 @@ export async function POST(req) {
             ${index + 1}. Professor: ${match.metadata.professor}
             Subject: ${match.metadata.subject}
             Rating: ${match.metadata.stars} stars
-            Review excerpt: "${match.metadata.review.substring(0, 100)}..."
+            Review: "${match.metadata.review}..."
             `;
         });
     }

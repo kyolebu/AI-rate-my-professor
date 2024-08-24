@@ -1,6 +1,7 @@
 'use client'
 import { Box, Button, Stack, TextField } from '@mui/material'
 import { useState } from 'react'
+import FilterComponent from '../components/FilterComponent'
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -10,33 +11,35 @@ export default function Home() {
     },
   ])
   const [message, setMessage] = useState('')
+  const [filters, setFilters] = useState({ subject: '', minRating: '' });
 
-  const parseUserCriteria = (message) => {
-    const criteria = {
-      subject: null,
-      minRating: null,
-    };
+  // const parseUserCriteria = (message) => {
+  //   const criteria = {
+  //     subject: null,
+  //     minRating: null,
+  //   };
 
-    function extractValue(message, key) {
-      const regex = new RegExp(`${key}:\\s*\\[(.*?)\\]`, 'i');
-      const match = message.match(regex);
-      return match ? match[1].trim() : null;
-    }
+  //   function extractValue(message, key) {
+  //     const regex = new RegExp(`${key}:\\s*\\[(.*?)\\]`, 'i');
+  //     const match = message.match(regex);
+  //     return match ? match[1].trim() : null;
+  //   }
   
-    if (message.toLowerCase().includes('subject:')) {
-      criteria.subject = extractValue(message, 'subject');
-    }
-    if (message.toLowerCase().includes('rating:')) {
-      criteria.minRating = parseInt(extractValue(message, 'rating') || '0');
-    }
+  //   if (message.toLowerCase().includes('subject:')) {
+  //     criteria.subject = extractValue(message, 'subject');
+  //   }
+  //   if (message.toLowerCase().includes('rating:')) {
+  //     criteria.minRating = parseInt(extractValue(message, 'rating') || '0');
+  //   }
 
-    console.log(criteria)
+  //   console.log(criteria)
   
-    return criteria;
-  };
+  //   return criteria;
+  // };
 
   const sendMessage = async () => {
-    const criteria = parseUserCriteria(message);
+    // const criteria = parseUserCriteria(message);
+    const criteria = { ...filters };
     
     setMessages((messages) => [
       ...messages,
@@ -81,7 +84,11 @@ export default function Home() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      sx={{
+        pt: { xs: '120px', sm: '80px' }, // Add top padding to accommodate the fixed filter
+      }}
     >
+      <FilterComponent onFilterChange={(filters) => setFilters(filters)} />
       <Stack
         direction={'column'}
         width="500px"
