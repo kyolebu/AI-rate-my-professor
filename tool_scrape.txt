@@ -1,5 +1,7 @@
 javascript:(function() {
-    localStorage.clear(); // Clear local storage to ensure no old data persists
+    // Clear previous cached data
+    localStorage.clear();
+
     let scrapedData = JSON.parse(localStorage.getItem('scrapedData')) || [];
     let pageCounter = 0;
     console.log('Starting scraping process...');
@@ -7,15 +9,35 @@ javascript:(function() {
     function scrapeCurrentPage() {
         const reviews = [];
         document.querySelectorAll('#ReviewsFeed > ol > li').forEach((reviewElement) => {
-            const reviewText = reviewElement.innerText || '';
-            console.log('Review Text:', reviewText);
+            const reviewTitle = reviewElement.querySelector('div.review-details_topReview__5NRVX > div.review-details_titleHeadline__Jppto > h3 > a')?.innerText || '';
+            const reviewRating = reviewElement.querySelector('div.review-details_topLineContainer__JYsGJ > div.review-details_subRatingContainer__17VcB > span')?.innerText || '';
+            const reviewDate = reviewElement.querySelector('div.review-details_topLineContainer__JYsGJ > div.review-details_reportWrapper__o2Xjs.review-details_reportWithExtra__rErhV > div > span')?.innerText || '';
+            const reviewerRole = reviewElement.querySelector('div.review-details_topReview__5NRVX > div.review-details_employeeContainer__zVtEK > span')?.innerText || '';
+            
+            // Attempt to capture pros and cons with multiple selectors
+            const reviewPros = reviewElement.querySelector('div.review-details_pro__rMvtX > p > span')?.innerText 
+                            || reviewElement.querySelector('div.review-details_fullWidth__EJVyC.review-details_pro__rMvtX > p.review-details_isExpanded__TGoRi > span')?.innerText 
+                            || reviewElement.querySelector('div.review-details_pro__rMvtX > p')?.innerText 
+                            || '';
+
+            const reviewCons = reviewElement.querySelector('div.review-details_con__9IvnD > p > span')?.innerText 
+                            || reviewElement.querySelector('div.review-details_fullWidth__EJVyC.review-details_con__9IvnD > p.review-details_isExpanded__TGoRi > span')?.innerText 
+                            || reviewElement.querySelector('div.review-details_con__9IvnD > p')?.innerText 
+                            || '';
+
             reviews.push({
-                text: reviewText
+                reviewTitle: reviewTitle,
+                reviewRating: reviewRating,
+                reviewDate: reviewDate,
+                reviewerRole: reviewerRole,
+                reviewPros: reviewPros,
+                reviewCons: reviewCons,
             });
         });
 
         scrapedData.push(...reviews);
         localStorage.setItem('scrapedData', JSON.stringify(scrapedData));
+
         console.log(`Scraped ${reviews.length} reviews from this page.`);
     }
 
@@ -27,61 +49,50 @@ javascript:(function() {
                 console.log('Navigating to next page...');
                 nextPageButton.click();
                 pageCounter++;
-                // Immediately scrape the next page after clicking the button
-                setTimeout(() => {
+                setTimeout(function() {
                     scrapeCurrentPage();
                     goToNextPage();
-                }, 2000); // Adjust timeout as needed to allow page loading
+                }, 5000);  // Adjust this delay if the page takes longer to load
             } else {
                 console.log('No more pages to scrape.');
                 console.log(`Total reviews scraped: ${scrapedData.length}`);
                 console.log('Final scraped data:', scrapedData);
-                
-                // Create a blob from the data
-                let blob = new Blob([JSON.stringify(scrapedData, null, 2)], { type: 'application/json' });
-                
-                // Create a link element
-                let link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'scrapedData.json';
-                
-                // Append the link to the body
-                document.body.appendChild(link);
-                
-                // Programmatically click the link to trigger the download
-                link.click();
-                
-                // Clean up by removing the link
-                document.body.removeChild(link);
-                
-                console.log('Data has been downloaded as scrapedData.json');
+
+                // Trigger the download of the JSON data
+                downloadData();
             }
         } else {
             console.log('Scraping complete. Reached the limit of 10 pages.');
             console.log(`Total reviews scraped: ${scrapedData.length}`);
             console.log('Final scraped data:', scrapedData);
-            
-            // Create a blob from the data
-            let blob = new Blob([JSON.stringify(scrapedData, null, 2)], { type: 'application/json' });
-            
-            // Create a link element
-            let link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'scrapedData.json';
-            
-            // Append the link to the body
-            document.body.appendChild(link);
-            
-            // Programmatically click the link to trigger the download
-            link.click();
-            
-            // Clean up by removing the link
-            document.body.removeChild(link);
-            
-            console.log('Data has been downloaded as scrapedData.json');
+
+            // Trigger the download of the JSON data
+            downloadData();
         }
+    }
+
+    function downloadData() {
+        // Create a blob from the data
+        let blob = new Blob([JSON.stringify(scrapedData, null, 2)], { type: 'application/json' });
+        
+        // Create a link element
+        let link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'scrapedData.json';
+        
+        // Append the link to the body
+        document.body.appendChild(link);
+        
+        // Programmatically click the link to trigger the download
+        link.click();
+        
+        // Clean up by removing the link
+        document.body.removeChild(link);
+        
+        console.log('Data has been downloaded as scrapedData.json');
     }
 
     scrapeCurrentPage();
     goToNextPage();
 })();
+

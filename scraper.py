@@ -4,6 +4,7 @@ import time
 from dotenv import load_dotenv, dotenv_values
 import os
 import sys
+import shutil
 
 
 
@@ -28,14 +29,12 @@ time.sleep(3)
 config = dotenv_values(".env")
 
 
-
-
-pyautogui.write(os.getenv("TOOL_SCRAPE_PATH"))
+pyautogui.write('tool_scrape.txt')
 time.sleep(5)
 pyautogui.press('enter')  # Execute
 
 print("Clicked on file of interest holding the JS code")
-time.sleep(15)
+time.sleep(2)
 
 
 # Select all content and copy
@@ -51,7 +50,7 @@ webbrowser.open('https://www.glassdoor.com/profile/login_input.htm')
 time.sleep(10)
 
 # Click "Sign in with Google"
-pyautogui.moveRel(-500,-500)  # Move left by -200 pixels
+#pyautogui.moveRel(-500,-500)  # Move cursor
 time.sleep(5)
 pyautogui.click()
 
@@ -103,9 +102,6 @@ pyautogui.press('tab')
 pyautogui.press('enter')
 time.sleep(5)
 
-    
-
-
 # Now this code will only work for large companies like Amazon, Google, etc because multiple searches will show up. Get to the company search
 pyautogui.click()
 pyautogui.press('tab')
@@ -136,3 +132,20 @@ time.sleep(50)  # Wait for execution
 pyautogui.hotkey('ctrl', 'shift', 'j')
 
 print("Script executed and JavaScript run.")
+
+
+# Move downloaded data into this directory
+
+downloads_path = os.path.expanduser('~/Downloads/scrapedData.json')  # Path in Downloads directory
+root_path = os.path.join(os.getcwd(), 'scrapedData.json')  # Path in the root directory
+
+# Move the file
+try:
+    shutil.move(downloads_path, root_path)
+    print(f"File moved to {root_path}")
+except FileNotFoundError:
+    print(f"File not found at {downloads_path}")
+except PermissionError:
+    print("Permission denied while moving the file")
+except Exception as e:
+    print(f"An error occurred: {e}")
