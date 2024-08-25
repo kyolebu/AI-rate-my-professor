@@ -130,7 +130,7 @@ print("Script executed and JavaScript run.")
 
 # Move downloaded data into this directory
 
-downloads_path = os.path.expanduser('~/Downloads/scrapedData.json')  # Path in Downloads directory
+downloads_path = os.path.expanduser('~\Downloads\scrapedData.json')  # Path in Downloads directory
 root_path = os.path.join(os.getcwd(), 'scrapedData.json')  # Path in the root directory
 
 # Move the file
