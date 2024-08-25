@@ -96,19 +96,13 @@ time.sleep(2)
 # Type the search query
 #search_query = 'Amazon'
 pyautogui.write(company_name)
-time.sleep(2)
+time.sleep(3)
 # Click "Search"
-pyautogui.press('tab')
+pyautogui.press('down')
 pyautogui.press('enter')
 time.sleep(5)
 
-# Now this code will only work for large companies like Amazon, Google, etc because multiple searches will show up. Get to the company search
-pyautogui.click()
-pyautogui.press('tab')
-time.sleep(1)
-pyautogui.press('enter')
-time.sleep(5)
-
+                    
 # Now get to review page
 pyautogui.click()
 for _ in range(5):
@@ -123,7 +117,7 @@ pyautogui.hotkey('ctrl', 'shift', 'j')
 time.sleep(15)
 
 # Paste the JavaScript code into the console
-pyautogui.press('tab')
+#pyautogui.press('tab')
 pyautogui.hotkey('ctrl', 'v')  # Paste
 pyautogui.press('enter')  # Execute
 time.sleep(50)  # Wait for execution
