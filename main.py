@@ -47,6 +47,7 @@ import datetime as dt
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import StaleElementReferenceException
 
 
 start = time.time()
@@ -431,6 +432,60 @@ def navigate_to_reviews():
     time.sleep(1)
     return True
 
+def slow_type(element, text, delay):
+        """Type text into an element with a delay between each character."""
+        for character in text:
+            element.send_keys(character)
+            time.sleep(delay)  # Adjust the delay as needed
+
+def click_next_button_js():
+    try:
+        next_button = WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.XPATH, "//button[@jsname='LgbsSe']"))
+        )
+        browser.execute_script("arguments[0].click();", next_button)
+        print("clicked next")
+    except Exception as e:
+        print(f"Error: {e}")
+
+
+def google_sign_in(email):
+    # Switch to the new window if it opens in a new tab
+    original_window = browser.current_window_handle
+    for window_handle in browser.window_handles:
+        if window_handle != original_window:
+            browser.switch_to.window(window_handle)
+            break
+
+    time.sleep(3)
+    # Wait for the email input field to be present and enter the email
+    email_input = WebDriverWait(browser, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
+    )
+    # email_input.send_keys(email)
+    slow_type(email_input, email, delay=0.3)
+
+    # print(browser.page_source)
+    print("entered email")
+    click_next_button_js()
+    time.sleep(5)
+    # try:
+    #     # Increase the wait time
+    #     next_button = WebDriverWait(browser, 20).until(
+    #         EC.element_to_be_clickable((By.XPATH, "//button[@jsname='LgbsSe']"))
+    #     )
+    #     print(next_button)
+    #     print("found Next")
+    #     next_button.click()
+    #     print("clicked Next")
+    # except Exception as e:
+    #     print(f"Error: {e}")
+
+# def switch_to_iframe():
+#     # Switch to the iframe if the element is inside one
+#     driver.switch_to.frame("iframe_name_or_id")  # Replace with actual iframe name or id
+#     click_next_button()
+
 
 def sign_in():
     logger.info(f'Signing in to {args.username}')
@@ -439,21 +494,48 @@ def sign_in():
     browser.get(url)
 
     # import pdb;pdb.set_trace()
-
-    email_field = browser.find_element(By.ID, 'inlineUserEmail').send_keys(args.username)
-    submit_btn = browser.find_element_by_xpath('//button[@type="submit"]')
+    time.sleep(3)
+    email_field = browser.find_element(By.ID, 'inlineUserEmail')
+    slow_type(email_field, args.username, delay=0.3)
+    submit_btn = browser.find_element(By.XPATH, '//button[@type="submit"]')
     time.sleep(3)
     submit_btn.click()
-    WebDriverWait(browser, 10).until(
-            EC.presence_of_element_located((By.ID, 'inlineUserPassword'))
-        ).send_keys(args.password)
+    # WebDriverWait(browser, 10).until(
+    #         EC.presence_of_element_located((By.XPATH, '//button[@data-test="googleBtn"]'))
+    #     )
+    max_retries = 3
+    retries = 0
+    while retries < max_retries:
+        try:
+            google_button = WebDriverWait(browser, 10).until(
+                EC.element_to_be_clickable((By.CSS_SELECTOR, ".google.gd-btn"))
+            )
+            time.sleep(3)
+            google_button.click()
+            break  # Exit loop if click is successful
+        except StaleElementReferenceException:
+            retries += 1
+    
+    google_sign_in("firesideaiofficial@gmail.com")
+
+    
     # password_field = browser.find_element(By.ID, 'inlineUserPassword').send_keys(args.password)
     # submit_btn = browser.find_element_by_xpath('//button[@type="submit"]')
-    sign_in_button = WebDriverWait(browser, 10).until(
-        EC.element_to_be_clickable((By.XPATH, '//button[@type="submit"]'))
-    )
+    # sign_in_button = WebDriverWait(browser, 10).until(
+    #     EC.element_to_be_clickable((By.XPATH, '//button[@data-test="googleBtn"]'))
+    # )
+    # google_button = browser.find_element(By.XPATH, '//button[@data-test="googleBtn"]')
     time.sleep(3)
-    sign_in_button.click()
+    # sign_in_button.click()
+    # google_button.click()
+    # Replace with the actual email you want to select
+    # email_to_select = "firesideaiofficial@gmail.com"
+
+    # # Wait until the email element with the specific data-identifier attribute is visible and click it
+    # email_element = WebDriverWait(browser, 10).until(
+    #     EC.element_to_be_clickable((By.XPATH, f'//div[@data-identifier="{email_to_select}"]'))
+    # )
+    # email_element.click()
 
     # submit_btn.click()
 
@@ -461,7 +543,6 @@ def sign_in():
     # password_field.send_keys(args.password)
     # submit_btn.click()
 
-    time.sleep(3)
     browser.get(args.url)
 
 
@@ -510,40 +591,40 @@ def main():
 
     sign_in()
 
-    if not args.start_from_url:
-        reviews_exist = navigate_to_reviews()
-        if not reviews_exist:
-            return
-    elif args.max_date or args.min_date:
-        verify_date_sorting()
-        browser.get(args.url)
-        page[0] = get_current_page()
-        logger.info(f'Starting from page {page[0]:,}.')
-        time.sleep(1)
-    else:
-        browser.get(args.url)
-        page[0] = get_current_page()
-        logger.info(f'Starting from page {page[0]:,}.')
-        time.sleep(1)
+    # if not args.start_from_url:
+    #     reviews_exist = navigate_to_reviews()
+    #     if not reviews_exist:
+    #         return
+    # elif args.max_date or args.min_date:
+    #     verify_date_sorting()
+    #     browser.get(args.url)
+    #     page[0] = get_current_page()
+    #     logger.info(f'Starting from page {page[0]:,}.')
+    #     time.sleep(1)
+    # else:
+    #     browser.get(args.url)
+    #     page[0] = get_current_page()
+    #     logger.info(f'Starting from page {page[0]:,}.')
+    #     time.sleep(1)
 
-    reviews_df = extract_from_page()
-    res = res.append(reviews_df)
+    # reviews_df = extract_from_page()
+    # res = res.append(reviews_df)
 
-    # import pdb;pdb.set_trace()
+    # # import pdb;pdb.set_trace()
 
-    while more_pages() and\
-            len(res) < args.limit and\
-            not date_limit_reached[0] and\
-                valid_page[0]:
-        go_to_next_page()
-        try:
-            reviews_df = extract_from_page()
-            res = res.append(reviews_df)
-        except:
-            break
+    # while more_pages() and\
+    #         len(res) < args.limit and\
+    #         not date_limit_reached[0] and\
+    #             valid_page[0]:
+    #     go_to_next_page()
+    #     try:
+    #         reviews_df = extract_from_page()
+    #         res = res.append(reviews_df)
+    #     except:
+    #         break
 
-    logger.info(f'Writing {len(res)} reviews to file {args.file}')
-    res.to_csv(args.file, index=False, encoding='utf-8')
+    # logger.info(f'Writing {len(res)} reviews to file {args.file}')
+    # res.to_csv(args.file, index=False, encoding='utf-8')
 
     end = time.time()
     logger.info(f'Finished in {end - start} seconds')
