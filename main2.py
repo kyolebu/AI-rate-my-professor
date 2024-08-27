@@ -548,6 +548,7 @@ def sign_in():
     browser.get(args.url)
 
 def sign_in_2():
+    browser.get(args.url)
     logger.info(f'Signing in to second {args.username}')
 
     # import pdb;pdb.set_trace()
@@ -576,11 +577,11 @@ def sign_in_2():
             # )
             # google_button = browser.find_element(By.ID, 'login-google-button')
             # google_button.click()
-            google_button = WebDriverWait(browser, 10).until(
-                EC.element_to_be_clickable((By.ID, "login-google-button"))
-            )
-            # Click the button
-            google_button.click()
+            WebDriverWait(browser, 10).until(EC.frame_to_be_available_and_switch_to_it((By.XPATH, '//iframe[@id="pass-iframe-Login-Modal"]')))
+
+            # Now find the button and click it
+            button = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.ID, "login-google-button")))
+            button.click()
             print("clicked second google")
             break
         except StaleElementReferenceException:
@@ -632,10 +633,12 @@ def main():
 
     res = pd.DataFrame([], columns=SCHEMA)
 
-    sign_in()
-    time.sleep(20)
+    # sign_in()
+    # time.sleep(20)
     sign_in_2()
     time.sleep(5)
+    print("done signing in")
+    browser.switch_to.default_content()
 
     # if not args.start_from_url:
     #     reviews_exist = navigate_to_reviews()
