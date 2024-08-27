@@ -61,8 +61,8 @@ parser.add_argument('-u', '--url',
                     default=DEFAULT_URL)
 parser.add_argument('-f', '--file', default='glassdoor_ratings.csv',
                     help='Output file.')
-# parser.add_argument('--headless', action='store_true',
-#                     help='Run Chrome in headless mode.')
+parser.add_argument('--headless', action='store_true',
+                    help='Run Chrome in headless mode.')
 parser.add_argument('--username', help='Email address used to sign in to GD.')
 parser.add_argument('-p', '--password', help='Password to sign in to GD.')
 parser.add_argument('-c', '--credentials', help='Credentials file')
@@ -467,10 +467,25 @@ def google_sign_in(email, password):
         print("Entered email")
 
         # Click Next using JS to avoid potential timing issues
-        click_next_button_js()
+        # click_next_button_js()
+        next_button = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.ID, "identifierNext")))  # "identifierNext" is the ID of the Next button after entering the email)
+        next_button.click()
+        print("clicked next")
         time.sleep(5)
-
         # Handle the password step if necessary (add your password handling here)
+        # try:
+        #     # Wait until the "Try again" button is present
+        #     try_again_button = WebDriverWait(browser, 10).until(
+        #         EC.element_to_be_clickable((By.CSS_SELECTOR, "a[aria-label='Try again']"))
+        #     )
+        #     # Click the "Try again" button
+        #     try_again_button.click()
+            
+        #     # Add any further actions you want to perform after clicking the button
+            
+        # except Exception as e:
+        #     print(f"An error occurred: {e}")
+        
 
     except Exception as e:
         print(f"Error during Google sign-in: {e}")
@@ -625,13 +640,22 @@ def sign_in_2():
 
 
 
+# def get_browser():
+#     logger.info('Configuring browser')
+#     chrome_options = wd.ChromeOptions()
+#     if args.headless:
+#         chrome_options.add_argument('--headless')
+#     chrome_options.add_argument('log-level=3')
+#     browser = wd.Chrome(options=chrome_options)
+#     return browser
+
 def get_browser():
     logger.info('Configuring browser')
-    chrome_options = wd.ChromeOptions()
-    # if args.headless:
-    #     chrome_options.add_argument('--headless')
-    chrome_options.add_argument('log-level=3')
-    browser = wd.Chrome(options=chrome_options)
+    firefox_options = wd.FirefoxOptions()
+    if args.headless:
+        firefox_options.add_argument('--headless')
+    firefox_options.set_preference("loglevel", "error")
+    browser = wd.Firefox(options=firefox_options)
     return browser
 
 
