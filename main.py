@@ -495,11 +495,11 @@ def sign_in():
 
     # import pdb;pdb.set_trace()
     time.sleep(3)
-    email_field = browser.find_element(By.ID, 'inlineUserEmail')
-    slow_type(email_field, args.username, delay=0.3)
-    submit_btn = browser.find_element(By.XPATH, '//button[@type="submit"]')
-    time.sleep(3)
-    submit_btn.click()
+    # email_field = browser.find_element(By.ID, 'inlineUserEmail')
+    # slow_type(email_field, args.username, delay=0.3)
+    # submit_btn = browser.find_element(By.XPATH, '//button[@type="submit"]')
+    # time.sleep(3)
+    # submit_btn.click()
     # WebDriverWait(browser, 10).until(
     #         EC.presence_of_element_located((By.XPATH, '//button[@data-test="googleBtn"]'))
     #     )
@@ -590,6 +590,7 @@ def main():
     res = pd.DataFrame([], columns=SCHEMA)
 
     sign_in()
+    time.sleep(20)
 
     # if not args.start_from_url:
     #     reviews_exist = navigate_to_reviews()
