@@ -31,6 +31,7 @@ Overall rating
 '''
 
 import time
+from httpcore import TimeoutException
 import pandas as pd
 from argparse import ArgumentParser
 import argparse
@@ -47,7 +48,7 @@ import datetime as dt
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import StaleElementReferenceException, ElementNotInteractableException
 
 
 start = time.time()
@@ -60,8 +61,8 @@ parser.add_argument('-u', '--url',
                     default=DEFAULT_URL)
 parser.add_argument('-f', '--file', default='glassdoor_ratings.csv',
                     help='Output file.')
-parser.add_argument('--headless', action='store_true',
-                    help='Run Chrome in headless mode.')
+# parser.add_argument('--headless', action='store_true',
+#                     help='Run Chrome in headless mode.')
 parser.add_argument('--username', help='Email address used to sign in to GD.')
 parser.add_argument('-p', '--password', help='Password to sign in to GD.')
 parser.add_argument('-c', '--credentials', help='Credentials file')
@@ -448,7 +449,7 @@ def click_next_button_js():
         print(f"Error: {e}")
 
 
-def google_sign_in(email):
+def google_sign_in(email, password):
     # Switch to the new window if it opens in a new tab
     original_window = browser.current_window_handle
     for window_handle in browser.window_handles:
@@ -457,33 +458,66 @@ def google_sign_in(email):
             break
 
     time.sleep(3)
-    # Wait for the email input field to be present and enter the email
-    email_input = WebDriverWait(browser, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
-    )
-    # email_input.send_keys(email)
-    slow_type(email_input, email, delay=0.3)
+    try:
+        # Wait for the email input field to be present and enter the email
+        email_input = WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='email']"))
+        )
+        slow_type(email_input, email, delay=0.3)
+        print("Entered email")
 
+        # Click Next using JS to avoid potential timing issues
+        click_next_button_js()
+        time.sleep(5)
+
+        # Handle the password step if necessary (add your password handling here)
+
+    except Exception as e:
+        print(f"Error during Google sign-in: {e}")
+        # Add more detailed logging here if needed
+    
     # print(browser.page_source)
-    print("entered email")
-    click_next_button_js()
-    time.sleep(5)
-    # try:
-    #     # Increase the wait time
-    #     next_button = WebDriverWait(browser, 20).until(
-    #         EC.element_to_be_clickable((By.XPATH, "//button[@jsname='LgbsSe']"))
-    #     )
-    #     print(next_button)
-    #     print("found Next")
-    #     next_button.click()
-    #     print("clicked Next")
-    # except Exception as e:
-    #     print(f"Error: {e}")
 
-# def switch_to_iframe():
-#     # Switch to the iframe if the element is inside one
-#     driver.switch_to.frame("iframe_name_or_id")  # Replace with actual iframe name or id
-#     click_next_button()
+    # try:
+    #     password_input = WebDriverWait(browser, 10).until(
+    #         EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='password']"))
+    #     )
+    #     print("Password input found")
+
+    # except Exception as e:
+    #     print(f"Error locating password input: {e}")
+
+    # Wait for the password input field to be visible
+    try:
+        password_input = WebDriverWait(browser, 15).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, "input[type='password']"))
+        )
+        print("Password input found")
+        slow_type(password_input, password, delay=0.3)
+        print("Entered password")
+
+        # Click the Next button for the password step
+        password_next_button = WebDriverWait(browser, 10).until(
+            EC.element_to_be_clickable((By.XPATH, "//button[@jsname='LgbsSe']"))
+        )
+        browser.execute_script("arguments[0].click();", password_next_button)
+        print("Clicked Next after entering password")
+    except (TimeoutException, ElementNotInteractableException) as e:
+        print("Error: Password input field is not interactable or not visible.")
+        print(e)
+        return False
+
+    # Wait for sign-in to complete
+    WebDriverWait(browser, 20).until(
+        EC.url_changes("https://accounts.google.com/signin/v2/challenge/pwd")
+    )
+    print("Signed in successfully!")
+
+    # finally:
+    #     # Return to the original window if needed
+    #     if browser.current_window_handle != original_window:
+    #         browser.close()
+    #         browser.switch_to.window(original_window)
 
 
 def sign_in():
@@ -518,7 +552,7 @@ def sign_in():
         except StaleElementReferenceException:
             retries += 1
     
-    google_sign_in("firesideaiofficial@gmail.com")
+    google_sign_in("firesideaiofficial@gmail.com", "e!ghtpmcst")
 
     
     # password_field = browser.find_element(By.ID, 'inlineUserPassword').send_keys(args.password)
@@ -587,15 +621,15 @@ def sign_in_2():
         except StaleElementReferenceException:
             retries += 1
     
-    google_sign_in("firesideaiofficial@gmail.com")
+    google_sign_in("firesideaiofficial@gmail.com", "e!ghtpmcst")
 
 
 
 def get_browser():
     logger.info('Configuring browser')
     chrome_options = wd.ChromeOptions()
-    if args.headless:
-        chrome_options.add_argument('--headless')
+    # if args.headless:
+    #     chrome_options.add_argument('--headless')
     chrome_options.add_argument('log-level=3')
     browser = wd.Chrome(options=chrome_options)
     return browser
@@ -639,6 +673,7 @@ def main():
     time.sleep(5)
     print("done signing in")
     browser.switch_to.default_content()
+    
 
     # if not args.start_from_url:
     #     reviews_exist = navigate_to_reviews()
