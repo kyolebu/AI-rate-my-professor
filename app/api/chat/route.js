@@ -66,12 +66,14 @@ async function upsertToPinecone(index) {
                         values: Array.from(embedding),
                         metadata: {
                             company: company,
-                            reviewTitle: review.reviewTitle,
-                            reviewRating: parseFloat(review.reviewRating),
-                            reviewDate: review.reviewDate,
                             reviewerRole: review.reviewerRole,
-                            reviewPros: review.reviewPros,
-                            reviewCons: review.reviewCons
+                            // reviewTitle: review.reviewTitle,
+                            reviewRating: parseFloat(review.reviewRating),
+                            reviewText: review.reviewText
+                            // reviewDate: review.reviewDate,
+                            // reviewerRole: review.reviewerRole,
+                            // reviewPros: review.reviewPros,
+                            // reviewCons: review.reviewCons
                         }
                     };
                 }));
@@ -90,12 +92,16 @@ async function upsertToPinecone(index) {
 
 export async function POST(req) {
     const data = await req.json()
+    const companyName = data.companyName; // Extract company name from request body
+
     const pc = new Pinecone({
       apiKey: process.env.PINECONE_API_KEY,
     })
     
     const indexName = 'company-reviews';
-    const namespaceName = 'ns1';
+    //const namespaceName = 'ns1';
+    const namespaceName = companyName; // Use companyName as namespace
+
     
     // Fetch all indexes
     const indexesResponse = await pc.listIndexes();
@@ -128,7 +134,10 @@ export async function POST(req) {
 
     const index = pc.index(indexName).namespace(namespaceName);
 
-    await upsertToPinecone(index);
+    // Only upsert if companyName is provided
+    if (companyName) {
+        await upsertToPinecone(index);
+    }
 
     const lastMessage = data[data.length - 1]
     const text = lastMessage.content
@@ -164,18 +173,7 @@ export async function POST(req) {
     }
   
     const results = await index.query(queryParams)
-  
-    // let resultString = '\n\nReturned results from vector db (done automatically)'
-    // results.matches.forEach((match) => {
-    //     resultString += `\n
-    //     Returned Results:
-    //     Professor: ${match.id}
-    //     Review: ${match.metadata.review}
-    //     Subject: ${match.metadata.subject}
-    //     Stars: ${match.metadata.stars}
-    //     \n\n
-    //     `
-    // })
+ 
 
     let resultString = '';
     if (results.matches.length === 0) {

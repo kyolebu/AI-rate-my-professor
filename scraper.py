@@ -46,8 +46,8 @@ def parse_reviews(text):
     
     for norm_job_title, overall_rating, review_text in review_blocks:
         review = {
-            'normJobTitle': norm_job_title,
-            'overallRating': int(overall_rating),
+            'reviewerRole': norm_job_title,
+            'reviewRating': int(overall_rating),
             'reviewText': review_text.replace('\\n', '\n').replace('\\"', '"')  # Unescape newlines and quotes
         }
         reviews.append(review)

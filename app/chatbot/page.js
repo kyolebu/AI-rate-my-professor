@@ -33,25 +33,32 @@ export default function Home() {
 
       const data = await response.json();
       
-      // if (response.ok) {
-      //   setMessages((messages) => [
-      //     ...messages,
-      //     { role: 'user', content: `Searching for reviews of ${searchCompany}` },
-      //     { role: 'assistant', content: 'Scraping data...' },
-      //   ]);
-      //   setSearchCompany('');
-      // } else {
-      //   setMessages((messages) => [
-      //     ...messages,
-      //     { role: 'assistant', content: `Error: ${data.error}` },
-      //   ]);
-      // }
+  
     } catch (error) {
       setMessages((messages) => [
         ...messages,
         { role: 'assistant', content: `Error: ${error.message}` },
       ]);
     }
+  };
+
+  const handleSubmit = async () => {
+    const response = await fetch('/api/chat', { // Adjust the path to your API route
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ companyName }), // Send company name in the request body
+    });
+
+    const data = await response.json();
+    console.log(data); // Handle the response
+  };
+
+  // Upon clicking the button, companyName is sent from front end to api/chat/route and api/search-company/route.
+  const handleClick = () => {
+    handleSearchCompany();
+    handleSubmit();
   };
 
   const sendMessage = async () => {
@@ -128,7 +135,7 @@ export default function Home() {
         <Button 
           style={{ backgroundColor: "#FF4433" }} 
           variant="contained" 
-          onClick={handleSearchCompany}
+          onClick={handleClick}
         >
           Search Company
         </Button>
