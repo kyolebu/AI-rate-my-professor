@@ -66,12 +66,14 @@ async function upsertToPinecone(index) {
                         values: Array.from(embedding),
                         metadata: {
                             company: company,
-                            reviewTitle: review.reviewTitle,
-                            reviewRating: parseFloat(review.reviewRating),
-                            reviewDate: review.reviewDate,
                             reviewerRole: review.reviewerRole,
-                            reviewPros: review.reviewPros,
-                            reviewCons: review.reviewCons
+                            // reviewTitle: review.reviewTitle,
+                            reviewRating: parseFloat(review.reviewRating),
+                            reviewText: review.reviewText
+                            // reviewDate: review.reviewDate,
+                            // reviewerRole: review.reviewerRole,
+                            // reviewPros: review.reviewPros,
+                            // reviewCons: review.reviewCons
                         }
                     };
                 }));
