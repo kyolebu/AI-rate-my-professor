@@ -1,7 +1,4 @@
 import time
-from dotenv import load_dotenv, dotenv_values
-from PIL import Image
-import shutil
 import sys
 import re
 import time
@@ -58,7 +55,7 @@ def parse_reviews(text):
     return reviews
 
 def read_file_with_encoding(file_path):
-    encodings = ['utf-8', 'iso-8859-1', 'windows-1252', 'ascii']
+    encodings = ['utf-8-sig', 'utf-8', 'iso-8859-1', 'windows-1252', 'ascii']
     
     for encoding in encodings:
         try:
@@ -69,9 +66,14 @@ def read_file_with_encoding(file_path):
     
     raise ValueError(f"Unable to read the file with any of the encodings: {encodings}")
 
+def safe_print(text):
+    try:
+        print(text)
+    except UnicodeEncodeError:
+        print(text.encode(sys.stdout.encoding, errors='replace').decode(sys.stdout.encoding))
+
 def main():
     try:
-        # company_name is imported from the front end.
         scrape_reviews(company_name)
         content = read_file_with_encoding(f'res_text_{company_name}.txt')
         reviews = parse_reviews(content)
@@ -80,20 +82,20 @@ def main():
         max_text_length = None  # Change this to a number if you want to limit the text length
         
         for i, review in enumerate(reviews, 1):
-            print(f"Review {i}:")
-            print(f"Job Title: {review['normJobTitle']}")
-            print(f"Overall Rating: {review['overallRating']}")
+            safe_print(f"Review {i}:")
+            safe_print(f"Job Title: {review['normJobTitle']}")
+            safe_print(f"Overall Rating: {review['overallRating']}")
             
             if max_text_length is not None:
                 display_text = review['reviewText'][:max_text_length] + "..." if len(review['reviewText']) > max_text_length else review['reviewText']
             else:
                 display_text = review['reviewText']
             
-            print(f"Review Text: {display_text}")
-            print()
+            safe_print(f"Review Text: {display_text}")
+            safe_print("")
     
     except ValueError as e:
-        print(f"Error: {e}")
+        safe_print(f"Error: {e}")
 
 if __name__ == "__main__":
     main()

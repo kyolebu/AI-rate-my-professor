@@ -33,19 +33,19 @@ export default function Home() {
 
       const data = await response.json();
       
-      if (response.ok) {
-        setMessages((messages) => [
-          ...messages,
-          { role: 'user', content: `Searching for reviews of ${searchCompany}` },
-          { role: 'assistant', content: 'Scraping data...' },
-        ]);
-        setSearchCompany('');
-      } else {
-        setMessages((messages) => [
-          ...messages,
-          { role: 'assistant', content: `Error: ${data.error}` },
-        ]);
-      }
+      // if (response.ok) {
+      //   setMessages((messages) => [
+      //     ...messages,
+      //     { role: 'user', content: `Searching for reviews of ${searchCompany}` },
+      //     { role: 'assistant', content: 'Scraping data...' },
+      //   ]);
+      //   setSearchCompany('');
+      // } else {
+      //   setMessages((messages) => [
+      //     ...messages,
+      //     { role: 'assistant', content: `Error: ${data.error}` },
+      //   ]);
+      // }
     } catch (error) {
       setMessages((messages) => [
         ...messages,
