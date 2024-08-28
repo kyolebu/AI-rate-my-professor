@@ -1,10 +1,7 @@
 import time
-from dotenv import load_dotenv, dotenv_values
-from PIL import Image
-import shutil
-import sys
+import json
 import re
-import time
+import sys
 import cloudscraper
 
 if len(sys.argv) < 2:
@@ -15,7 +12,6 @@ if len(sys.argv) < 2:
 company_name = sys.argv[1]
 
 print(f"Scraping data for {company_name}")
-
 
 def scrape_reviews(company):
     url = f"https://www.indeed.com/cmp/{company}/reviews?start=0"
@@ -35,23 +31,22 @@ def scrape_reviews(company):
             continue  # Retry the scraping process
         else:
             # Save the valid response to a file
-            with open(f'res_text_{company}.txt', 'w') as file:
+            with open(f'res_text_{company}.txt', 'w', encoding='utf-8') as file:
                 file.write(res.text)
             print(f"Success! Response text saved to res_text_{company}.txt")
             break  # Exit the loop once the response is valid
 
-
 def parse_reviews(text):
     reviews = []
     
-    # Find all review blocks
+    # Find all review blocks using regular expressions
     review_blocks = re.findall(r'"normJobTitle":"([^"]+).*?"overallRating":(\d+).*?"text":{"text":"(.*?)"}\s*,\s*"title":', text, re.DOTALL)
     
     for norm_job_title, overall_rating, review_text in review_blocks:
         review = {
-            'normJobTitle': norm_job_title,
-            'overallRating': int(overall_rating),
-            'reviewText': review_text.replace('\\n', '\n').replace('\\"', '"')  # Unescape newlines and quotes
+            'job_title': norm_job_title,
+            'overall_rating': int(overall_rating),
+            'review_text': review_text.replace('\\n', '\n').replace('\\"', '"')  # Unescape newlines and quotes
         }
         reviews.append(review)
     
@@ -69,28 +64,20 @@ def read_file_with_encoding(file_path):
     
     raise ValueError(f"Unable to read the file with any of the encodings: {encodings}")
 
+def save_reviews_to_json(reviews, company):
+    with open(f'reviews_{company}.json', 'w', encoding='utf-8') as f:
+        json.dump(reviews, f, indent=4, ensure_ascii=False)
+
 def main():
     try:
-        # company_name is imported from the front end.
+        # Scrape reviews for the given company
         scrape_reviews(company_name)
         content = read_file_with_encoding(f'res_text_{company_name}.txt')
         reviews = parse_reviews(content)
         
-        # Set max_text_length to None for full text, or a number for limited display
-        max_text_length = None  # Change this to a number if you want to limit the text length
-        
-        for i, review in enumerate(reviews, 1):
-            print(f"Review {i}:")
-            print(f"Job Title: {review['normJobTitle']}")
-            print(f"Overall Rating: {review['overallRating']}")
-            
-            if max_text_length is not None:
-                display_text = review['reviewText'][:max_text_length] + "..." if len(review['reviewText']) > max_text_length else review['reviewText']
-            else:
-                display_text = review['reviewText']
-            
-            print(f"Review Text: {display_text}")
-            print()
+        # Save the reviews to a JSON file
+        save_reviews_to_json(reviews, company_name)
+        print(f"Reviews saved to reviews_{company_name}.json")
     
     except ValueError as e:
         print(f"Error: {e}")
