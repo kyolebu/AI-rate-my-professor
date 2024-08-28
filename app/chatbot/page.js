@@ -43,12 +43,12 @@ export default function Home() {
   };
 
   const handleSubmit = async () => {
-    const response = await fetch('/api/chat', { // Adjust the path to your API route
+    const response = await fetch('/api/upsert', { // Adjust the path to your API route
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ companyName }), // Send company name in the request body
+      body: JSON.stringify({ companyName: searchCompany }), // Send company name in the request body
     });
 
     const data = await response.json();
@@ -56,8 +56,8 @@ export default function Home() {
   };
 
   // Upon clicking the button, companyName is sent from front end to api/chat/route and api/search-company/route.
-  const handleClick = () => {
-    handleSearchCompany();
+  const handleClick = async () => {
+    await handleSearchCompany();
     handleSubmit();
   };
 

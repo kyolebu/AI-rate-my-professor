@@ -1,14 +1,11 @@
 import { Pinecone } from '@pinecone-database/pinecone';
 
-
 export async function GET(req) {
-    
     try {
         const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY });
         const indexName = 'company-reviews'; // Replace with your actual index name
-        const namespaceName = 'ns1'; // Replace with your actual namespace if applicable
 
-         // Check if the index exists
+        // Check if the index exists
         const indexesResponse = await pc.listIndexes();
         const indexNames = indexesResponse.indexes.map(index => index.name);
         const indexExists = indexNames.includes(indexName);
@@ -27,29 +24,27 @@ export async function GET(req) {
                 },
             });
         }
-        const index = pc.index(indexName).namespace(namespaceName);
+        const index = pc.index(indexName);
 
-        // Fetch companies
+        // Fetch stats response
         const statsResponse = await index.describeIndexStats();
-        console.log('Stats response:', statsResponse); // Log the entire response
+        console.log('Full Stats Response:', JSON.stringify(statsResponse, null, 2)); // Log the full response for debugging
 
         let companies = [];
-        if (statsResponse && statsResponse.dimension) {
-            // If we can't get companies from metadata, we'll fetch them from the actual data
-            const queryResponse = await index.query({
-                topK: 150, // Adjust based on your needs
-                includeMetadata: true,
-                vector: new Array(statsResponse.dimension).fill(0) // Create a zero vector of the correct dimension
-            });
 
-            companies = [...new Set(queryResponse.matches.map(match => match.metadata.company))];
+        if (statsResponse && statsResponse.namespaces) {
+            for (const namespace of Object.keys(statsResponse.namespaces)) {
+                console.log(`Processing namespace: ${namespace}`);
+                const queryResponse = await index.namespace(namespace).query({
+                    topK: 150,
+                    includeMetadata: true,
+                    vector: new Array(statsResponse.dimension).fill(0) // Use a meaningful vector or adjust as needed
+                });
+
+                const namespaceCompanies = queryResponse.matches.map(match => match.metadata.company);
+                companies = [...new Set([...companies, ...namespaceCompanies])];
+            }
         }
-
-        // // Fetch companies (assuming they're stored in metadata)
-        // const companiesResponse = await index.describeIndexStats({
-        //     includeMetadataFields: ['company'],
-        // });
-        // const companies = companiesResponse.stats.metadataFields.company.values;
 
         // Ratings are now from 1 to 5 in increments of 0.5
         const ratings = [1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];

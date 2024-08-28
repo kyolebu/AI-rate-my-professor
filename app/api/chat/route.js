@@ -25,9 +25,9 @@ const inference = new HfInference(process.env.HUGGINGFACE_API_KEY);
 const pc = new Pinecone({apiKey: process.env.PINECONE_API_KEY});
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-async function upsertToPinecone(index) {
+async function upsertToPinecone(index, companyName) {
     try {
-        const filePath = path.join(process.cwd(), 'company_reviews.json');
+        const filePath = path.join(process.cwd(), `reviews_${companyName}.json`);
         console.log('Attempting to read file:', filePath);
 
         const fileContents = await fs.readFile(filePath, 'utf8');
@@ -92,55 +92,58 @@ async function upsertToPinecone(index) {
 
 export async function POST(req) {
     const data = await req.json()
-    const companyName = data.companyName; // Extract company name from request body
-
-    const pc = new Pinecone({
-      apiKey: process.env.PINECONE_API_KEY,
-    })
+    // const companyName = data.companyName; // Extract company name from request body
+    // console.log("companyName in chat POST: ", companyName)
+    // const pc = new Pinecone({
+    //   apiKey: process.env.PINECONE_API_KEY,
+    // })
     
-    const indexName = 'company-reviews';
-    //const namespaceName = 'ns1';
-    const namespaceName = companyName; // Use companyName as namespace
+    // const indexName = 'company-reviews';
+    // //const namespaceName = 'ns1';
+    // const namespaceName = companyName; // Use companyName as namespace
 
     
-    // Fetch all indexes
-    const indexesResponse = await pc.listIndexes();
-    console.log("Indexes Response:", indexesResponse);
+    // // Fetch all indexes
+    // const indexesResponse = await pc.listIndexes();
+    // console.log("Indexes Response:", indexesResponse);
 
-    // Extract the index names
-    const indexNames = indexesResponse.indexes.map(index => index.name);
-    console.log("Extracted Index Names:", indexNames);
+    // // Extract the index names
+    // const indexNames = indexesResponse.indexes.map(index => index.name);
+    // console.log("Extracted Index Names:", indexNames);
 
-    // Check if the index exists
-    const indexExists = indexNames.includes(indexName);
+    // // Check if the index exists
+    // const indexExists = indexNames.includes(indexName);
 
-    console.log(`Index ${indexExists ? 'exists' : 'does not exist'}`);
+    // console.log(`Index ${indexExists ? 'exists' : 'does not exist'}`);
 
-    if (!indexExists) {
-        console.log(`Index ${indexName} does not exist. Creating index...`);
-        await pc.createIndex({
-            name: indexName,
-            dimension: 384, // Adjust based on your embedding model
-            metric: 'cosine', // Adjust based on your use case
-            spec: {
-                serverless: {
-                    cloud: 'aws',
-                    region: 'us-east-1',
-                },
-            },
-        });
-        console.log(`Index ${indexName} created successfully.`);
-    }
+    // if (!indexExists) {
+    //     console.log(`Index ${indexName} does not exist. Creating index...`);
+    //     await pc.createIndex({
+    //         name: indexName,
+    //         dimension: 384, // Adjust based on your embedding model
+    //         metric: 'cosine', // Adjust based on your use case
+    //         spec: {
+    //             serverless: {
+    //                 cloud: 'aws',
+    //                 region: 'us-east-1',
+    //             },
+    //         },
+    //     });
+    //     console.log(`Index ${indexName} created successfully.`);
+    // }
 
-    const index = pc.index(indexName).namespace(namespaceName);
+    // const index = pc.index(indexName).namespace(namespaceName);
 
-    // Only upsert if companyName is provided
-    if (companyName) {
-        await upsertToPinecone(index);
-    }
+    // // Only upsert if companyName is provided
+    // if (companyName) {
+    //     console.log("companyName found and trying upsert: ", companyName)
+    //     await upsertToPinecone(index, companyName);
+    // }
 
     const lastMessage = data[data.length - 1]
+    console.log("lastMessage: ", lastMessage)
     const text = lastMessage.content
+    console.log("text: ", text)
     const criteria = lastMessage.criteria || {};
 
     console.log("criteria: ", criteria)
