@@ -1,12 +1,11 @@
-import pyautogui
-import webbrowser
 import time
 from dotenv import load_dotenv, dotenv_values
-import os
-import sys
+from PIL import Image
 import shutil
-
-
+import sys
+import re
+import time
+import cloudscraper
 
 if len(sys.argv) < 2:
     print("Usage: python scraper.py <company_name>")
@@ -16,130 +15,85 @@ if len(sys.argv) < 2:
 company_name = sys.argv[1]
 
 print(f"Scraping data for {company_name}")
-load_dotenv()
 
 
-# Open up file to copy code
-pyautogui.hotkey('win', 'e')
-time.sleep(15)
-
-# Type file path in the home searchbar in file explorer and Focus on the address bar (Ctrl + L or Alt + D)
-pyautogui.hotkey('ctrl', 'l')  # You can also use 'alt', 'd' depending on your version
-time.sleep(3)
-config = dotenv_values(".env")
-
-
-pyautogui.write('tool_scrape.txt')
-time.sleep(5)
-pyautogui.press('enter')  # Execute
-
-print("Clicked on file of interest holding the JS code")
-time.sleep(2)
-
-
-# Select all content and copy
-pyautogui.hotkey('ctrl', 'a')  # Select all
-pyautogui.hotkey('ctrl', 'c')  # Copy
-time.sleep(5)
-
-
-# Open the Glassdoor login page in the default web browser
-webbrowser.open('https://www.glassdoor.com/profile/login_input.htm')
-
-# Wait for the page to load
-time.sleep(10)
-
-# Click "Sign in with Google"
-#pyautogui.moveRel(-500,-500)  # Move cursor
-time.sleep(5)
-pyautogui.click()
-
-for _ in range(3):
-    pyautogui.press('tab')
-
-pyautogui.press('enter')
-
-# Add a delay if necessary for the new page to load
-time.sleep(5)
-
-# Click "Log in with Fireside"
-fireside_location = pyautogui.locateCenterOnScreen(os.getenv("FIRESIDE_GMAIL"), confidence=0.6)
-if fireside_location is not None:
-    pyautogui.click(fireside_location)
-    print("Clicked on 'Log in with Fireside' button")
-else:
-    print("Could not find the 'Sign in with Fireside' button on the screen")
-
-time.sleep(5)
-
-# Click "Continue"
-for _ in range(6):
-    pyautogui.press('tab')
-
-pyautogui.press('enter')
-time.sleep(5)
-
-# Click "Companies"
-for _ in range(6):
-    pyautogui.press('tab')
-
-pyautogui.press('enter')
-time.sleep(5)
-
-# Get to the company search
-for _ in range(17):
-    pyautogui.press('tab')
+def scrape_reviews(company):
+    url = f"https://www.indeed.com/cmp/{company}/reviews?start=0"
+    c_scraper = cloudscraper.create_scraper(delay=10, browser="chrome") 
+    res = c_scraper.get(url) 
     
+    # Define the text that indicates a security check
+    security_check_text = "Security Check"
 
-time.sleep(2)
+    while True:
+        res = c_scraper.get(url)
+        
+        # Check if the response contains the security check text
+        if security_check_text in res.text:
+            print("Encountered a security check, retrying...")
+            time.sleep(5)  # Wait for 5 seconds before retrying
+            continue  # Retry the scraping process
+        else:
+            # Save the valid response to a file
+            with open(f'res_text_{company}.txt', 'w') as file:
+                file.write(res.text)
+            print(f"Success! Response text saved to res_text_{company}.txt")
+            break  # Exit the loop once the response is valid
 
-# Type the search query
-#search_query = 'Amazon'
-pyautogui.write(company_name)
-time.sleep(3)
-# Click "Search"
-pyautogui.press('down')
-pyautogui.press('enter')
-time.sleep(5)
 
-                    
-# Now get to review page
-pyautogui.click()
-for _ in range(5):
-    pyautogui.press('tab')
+def parse_reviews(text):
+    reviews = []
     
-pyautogui.press('enter')
-time.sleep(5)
+    # Find all review blocks
+    review_blocks = re.findall(r'"normJobTitle":"([^"]+).*?"overallRating":(\d+).*?"text":{"text":"(.*?)"}\s*,\s*"title":', text, re.DOTALL)
+    
+    for norm_job_title, overall_rating, review_text in review_blocks:
+        review = {
+            'normJobTitle': norm_job_title,
+            'overallRating': int(overall_rating),
+            'reviewText': review_text.replace('\\n', '\n').replace('\\"', '"')  # Unescape newlines and quotes
+        }
+        reviews.append(review)
+    
+    return reviews
 
-# Open console. Works for default edge browser for windows
-print('Time to open console')
-pyautogui.hotkey('ctrl', 'shift', 'j')
-time.sleep(15)
+def read_file_with_encoding(file_path):
+    encodings = ['utf-8', 'iso-8859-1', 'windows-1252', 'ascii']
+    
+    for encoding in encodings:
+        try:
+            with open(file_path, 'r', encoding=encoding) as file:
+                return file.read()
+        except UnicodeDecodeError:
+            continue
+    
+    raise ValueError(f"Unable to read the file with any of the encodings: {encodings}")
 
-# Paste the JavaScript code into the console
-#pyautogui.press('tab')
-pyautogui.hotkey('ctrl', 'v')  # Paste
-pyautogui.press('enter')  # Execute
-time.sleep(50)  # Wait for execution
+def main():
+    try:
+        # company_name is imported from the front end.
+        scrape_reviews(company_name)
+        content = read_file_with_encoding(f'res_text_{company_name}.txt')
+        reviews = parse_reviews(content)
+        
+        # Set max_text_length to None for full text, or a number for limited display
+        max_text_length = None  # Change this to a number if you want to limit the text length
+        
+        for i, review in enumerate(reviews, 1):
+            print(f"Review {i}:")
+            print(f"Job Title: {review['normJobTitle']}")
+            print(f"Overall Rating: {review['overallRating']}")
+            
+            if max_text_length is not None:
+                display_text = review['reviewText'][:max_text_length] + "..." if len(review['reviewText']) > max_text_length else review['reviewText']
+            else:
+                display_text = review['reviewText']
+            
+            print(f"Review Text: {display_text}")
+            print()
+    
+    except ValueError as e:
+        print(f"Error: {e}")
 
-# Close the console
-pyautogui.hotkey('ctrl', 'shift', 'j')
-
-print("Script executed and JavaScript run.")
-
-
-# Move downloaded data into this directory
-
-downloads_path = os.path.expanduser('~\Downloads\scrapedData.json')  # Path in Downloads directory
-root_path = os.path.join(os.getcwd(), 'scrapedData.json')  # Path in the root directory
-
-# Move the file
-try:
-    shutil.move(downloads_path, root_path)
-    print(f"File moved to {root_path}")
-except FileNotFoundError:
-    print(f"File not found at {downloads_path}")
-except PermissionError:
-    print("Permission denied while moving the file")
-except Exception as e:
-    print(f"An error occurred: {e}")
+if __name__ == "__main__":
+    main()
