@@ -8,6 +8,21 @@
         {
             "reviewerRole": "Software Engineer",
             "reviewRating": 5,
+            "reviewText": "Working at Google has been an incredible experience. The company truly values its employees and provides an environment that fosters innovation, creativity, and personal growth. The culture is inclusive, collaborative, and encourages a healthy work-life balance."
+        },
+        {
+            "reviewerRole": "Customer Service Representative",
+            "reviewRating": 5,
+            "reviewText": "Good working place, good experience, good teams, good teamwork, good salary. Comfortable. Recommended. B.                                               "
+        },
+        {
+            "reviewerRole": "Data Entry Clerk",
+            "reviewRating": 5,
+            "reviewText": "I recently worked as a data entry clerk for a mid-sized company, and my experience was quite positive overall. The role primarily involved entering, updating, and maintaining information in the company’s database. While it may seem monotonous at times, I appreciated the structured nature of the job, which allowed me to develop a strong attention to detail and improve my typing speed.\n\nThe working environment was supportive, with management encouraging open communication. I received thorough training, which helped me familiarize myself with the specific software and tools used for data entry. One of the highlights of the job was the flexibility in work hours; I was able to choose shifts that suited my schedule, enhancing my work-life balance.\n\nOn the downside, the repetitive nature of the tasks could sometimes lead to boredom. To counteract this, I found it helpful to take regular breaks and set small goals to keep myself motivated. Overall, the position was a good fit for someone looking for a stable job with the opportunity to sharpen organizational skills."
+        },
+        {
+            "reviewerRole": "Software Engineer",
+            "reviewRating": 5,
             "reviewText": "good company to work for. pay is good and so are the amenities. work is challenging and meaningful and the problems are interesting. would recommend.."
         },
         {
@@ -89,21 +104,6 @@
             "reviewerRole": "Sales Representative",
             "reviewRating": 5,
             "reviewText": "It was great job to work at. There things that needed to be done, but overall it was very helpful. The management was awesome to work with and would highly recommend the company. "
-        },
-        {
-            "reviewerRole": "Executive Assistant",
-            "reviewRating": 4,
-            "reviewText": "Work here and you shall not regret it. The environment is a wonderful place to work and the people over there are always eager to support you and offer their guidance. Not bad overall but their bathrooms could stand to be cleaner."
-        },
-        {
-            "reviewerRole": "Security Officer",
-            "reviewRating": 5,
-            "reviewText": "Great company and I really like the staff and people. It takes a lot out of you, but it's rewarding in the end.\n\nNext time you go to a Google HQ take time to thank the Security. They'll appreciate the gesture."
-        },
-        {
-            "reviewerRole": "Administrative Assistant",
-            "reviewRating": 1,
-            "reviewText": "Working at Google may not suit everyone, as it can lead to a highly competitive, intense work environment. The culture of constant innovation and change might be overwhelming for those seeking stability. Furthermore, the size and scale of Google can make individual contributions feel insignificant, stifling personal creativity and autonomy."
         }
     ]
 }

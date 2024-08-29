@@ -15,6 +15,7 @@ export default function Home() {
   const [filters, setFilters] = useState({ role: '', minRating: '' });
   const [searchCompany, setSearchCompany] = useState('');
   const [isLoading, setIsLoading] = useState(false); // Track loading state
+  const [isScraping, setIsScraping] = useState(false); // Track scraping state
 
   // Function to handle sending company name for scraping
   const handleSearchCompany = async () => {
@@ -53,11 +54,13 @@ export default function Home() {
     });
 
     const data = await response.json();
+    setIsScraping(false)
     console.log(data); // Handle the response
   };
 
   // Upon clicking the button, companyName is sent from front end to api/chat/route and api/search-company/route.
   const handleClick = async () => {
+    setIsScraping(true)
     await handleSearchCompany();
     handleSubmit();
   };
@@ -142,6 +145,12 @@ export default function Home() {
         >
           Search Company
         </Button>
+        {isScraping && ( // Display loading spinner when loading
+            <Box display="flex" justifyContent="center" alignItems="center" sx={{ my: 2 }}>
+              <CircularProgress color="inherit" />
+              <Typography variant="body1" ml={2}>Scraping...</Typography>
+            </Box>
+        )}
         <FilterComponent onFilterChange={(filters) => setFilters(filters)} />
       </Box>
       <Stack
