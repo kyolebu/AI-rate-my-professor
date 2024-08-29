@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Button, Stack, TextField, Typography } from '@mui/material';
+import { Box, Button, Stack, TextField, Typography, CircularProgress } from '@mui/material';
 import { useState } from 'react';
 import FilterComponent from '../components/FilterComponent';
 
@@ -8,12 +8,13 @@ export default function Home() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: `Hi! I'm the Rate My Professor support assistant. How can I help you today?`,
+      content: `Hi! I'm the Rate My Company support assistant. How can I help you today?`,
     },
   ]);
   const [message, setMessage] = useState('');
   const [filters, setFilters] = useState({ role: '', minRating: '' });
   const [searchCompany, setSearchCompany] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Track loading state
 
   // Function to handle sending company name for scraping
   const handleSearchCompany = async () => {
@@ -71,6 +72,7 @@ export default function Home() {
     ]);
     
     setMessage('');
+    setIsLoading(true); // Set loading to true
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: {
@@ -85,6 +87,7 @@ export default function Home() {
 
     const processText = async ({ done, value }) => {
       if (done) {
+        setIsLoading(false); // Set loading to false once done
         return result;
       }
       const text = decoder.decode(value || new Uint8Array(), { stream: true });
@@ -178,6 +181,11 @@ export default function Home() {
               </Box>
             </Box>
           ))}
+          {isLoading && ( // Display loading spinner when loading
+            <Box display="flex" justifyContent="flex-start">
+              <CircularProgress color="inherit" />
+            </Box>
+          )}
         </Stack>
         
         <Stack direction={'row'} spacing={2}>
