@@ -9,6 +9,12 @@ import path from 'path';
 const inference = new HfInference(process.env.HUGGINGFACE_API_KEY);
 const pc = new Pinecone({apiKey: process.env.PINECONE_API_KEY});
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+// Write namespaces to a file
+async function writeNamespaces(namespaces) {
+    const filePath = path.join(process.cwd(), 'namespaces.json');
+    await fs.writeFile(filePath, JSON.stringify(namespaces));
+  }
+
 
 async function upsertToPinecone(index, companyName) {
     try {
@@ -78,6 +84,11 @@ async function upsertToPinecone(index, companyName) {
 export async function POST(req) {
     const data = await req.json()
     const companyName = data.companyName; // Extract company name from request body
+    companyName = companyName
+        .toLowerCase()                      // Convert to lowercase
+        .replace(/\s+/g, '')                // Remove all spaces
+        .replace(/[^\w\-]/g, '');  
+        
     console.log("companyName in upsert POST: ", companyName)
     const pc = new Pinecone({
       apiKey: process.env.PINECONE_API_KEY,
@@ -86,6 +97,8 @@ export async function POST(req) {
     const indexName = 'company-reviews';
     //const namespaceName = 'ns1';
     const namespaceName = companyName; // Use companyName as namespace
+
+    
 
     
     // Fetch all indexes
@@ -118,11 +131,17 @@ export async function POST(req) {
     }
 
     const index = pc.index(indexName).namespace(namespaceName);
-
+    
     // Only upsert if companyName is provided
     if (companyName) {
         console.log("companyName found and trying upsert: ", companyName)
         await upsertToPinecone(index, companyName);
+        const statsResponse = await index.describeIndexStats();
+        console.log('namespaces', JSON.stringify(statsResponse, null, 2)); // Log the full response for debugging
+        const namespaces = Object.keys(statsResponse.namespaces);
+        namespaces.push(companyName);
+
+        await writeNamespaces(namespaces);
     }
 
     return NextResponse.json({ message: `Data for ${companyName} has been upserted]` })

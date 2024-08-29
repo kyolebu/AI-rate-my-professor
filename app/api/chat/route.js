@@ -24,12 +24,6 @@ If a company cannot be found with the given role or rating, respond by saying a 
 const inference = new HfInference(process.env.HUGGINGFACE_API_KEY);
 const pc = new Pinecone({apiKey: process.env.PINECONE_API_KEY});
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-
-// Write namespaces to a file
-async function writeNamespaces(namespaces) {
-    const filePath = path.join(process.cwd(), 'namespaces.json');
-    await fs.writeFile(filePath, JSON.stringify(namespaces));
-  }
   
 
 
@@ -38,11 +32,7 @@ export async function POST(req) {
     const companyName = data.companyName; // Extract company name from request body
   
     
-    const indexName = 'company-reviews';
-    // //const namespaceName = 'ns1';
-    const namespaceName = companyName; // Use companyName as namespace
-
-    
+    const indexName = 'company-reviews'; 
 
     const lastMessage = data[data.length - 1]
     console.log("lastMessage: ", lastMessage)
@@ -52,11 +42,7 @@ export async function POST(req) {
 
     console.log("criteria: ", criteria)
 
-    const index = pc.index(indexName);
-    const statsResponse = await index.describeIndexStats();
-    console.log('namespaces', JSON.stringify(statsResponse, null, 2)); // Log the full response for debugging
-    const namespaces = Object.keys(statsResponse.namespaces);
-    await writeNamespaces(namespaces);
+    
 
     console.log('Namespaces: ', namespaces)
     
